@@ -1,2 +1,8 @@
-data/xml/*/
+data
 # data/csv/*/
+# data/parlaw
+# data/plots
+# data/party_maps
+# data/embeddings
+.vscode
+lda
