@@ -57,6 +57,12 @@
 %\usepackage[disable,textsize=tiny]{todonotes}
 \usepackage[textsize=tiny]{todonotes}
 
+% quabel: use biblatex, because citations are not working yet
+% \usepackage[backend=biber,style=authoryear]{biblatex}
+% \addbibresource{bibliography.bib}
+
+\bibliography{bibliography}
+
 
 % The \icmltitle you define below is probably too long as a header.
 % Therefore, a short form for the running title is supplied here:
@@ -124,13 +130,19 @@
 % \printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
 
 \begin{abstract}
-Motivated by the rise of populism and shifting power dynamics within the European parliament (EP) since the late 1990s, this study investigates potential ideological drifts in EP speeches using natural language processing methods. We analyze how the semantic content and emotional tone of speeches evolve, and explore how different parliamentary groups compare in their use of language across different legislative periods.
+Motivated by the rise of populism in Europe since the late 1990s, this study investigates ideological shifts in European Parliament speeches using natural language processing. Drawing on the novel ParLawSpeech dataset (Schwalbach et al., 2025) which contains 574,199 speeches from 1999 to 2024 alongside metadata on speaker identity, we use sentence embedding models to examine the semantic content and emotional tone of parliamentary debates over time.
 
-We conduct quantitative text analyses on the novel *ParlLawSpeech* dataset (Schwalbach et al., 2025), which includes machine-readable full text of 574,199 parliamentary speeches alongside their metadata, covering legislative periods from 1999 - 2024.
+We expect that speech embeddings will form clusters reflecting party affiliation and ideological alignment. In step with recent political developments, we further hypothesize an increase in negative sentiment within the immigration debate among centrist and right-wing groups, accompanied by growing semantic similarity between these two factions over the past two decades. Finally, we test whether established migration-related narratives associated with right-wing populism can be identified in parliamentary discourse and how their prevalence has developed over time.
 
-Using open-source sentence embedding models, we extract rhetorical features from parliamentarians' speeches, evaluate intra- and inter-group alignment on selected topics with a focus on migration and apply text scaling to infer underlying political dimensions, which we then compare against expert-derived assessments. In addition, we incorporate sentiment analysis and complementary NLP techniques to capture specific aspects of political rhetoric.
 
-We expect that speech embeddings will form clusters reflecting party affiliation and ideological alignment. Drawing on existing literature and recent political developments, we further hypothesize an increase in negative sentiment within the immigration debate among centrist and right-wing groups, accompanied by growing semantic similarity between these two factions over the past two decades. Finally, we test whether established migration-related narratives associated with right-wing populism can be identified in parliamentary discourse and how their prevalence has developed over time.
+
+% We analyze how the semantic content and emotional tone of speeches evolve, and explore how different parliamentary groups compare in their use of language across different legislative periods.
+
+% We conduct quantitative text analyses on the novel *ParlLawSpeech* dataset (Schwalbach et al., 2025), which includes machine-readable full text of 574,199 parliamentary speeches alongside their metadata, covering legislative periods from 1999 - 2024.
+
+% Using open-source sentence embedding models, we extract rhetorical features from parliamentarians' speeches, evaluate intra- and inter-group alignment on selected topics with a focus on migration and apply text scaling to infer underlying political dimensions, which we then compare against expert-derived assessments. In addition, we incorporate sentiment analysis and complementary NLP techniques to capture specific aspects of political rhetoric.
+
+% We expect that speech embeddings will form clusters reflecting party affiliation and ideological alignment. Drawing on existing literature and recent political developments, we further hypothesize an increase in negative sentiment within the immigration debate among centrist and right-wing groups, accompanied by growing semantic similarity between these two factions over the past two decades. Finally, we test whether established migration-related narratives associated with right-wing populism can be identified in parliamentary discourse and how their prevalence has developed over time.
 \end{abstract}
 
 % \section{Introduction}\label{sec:intro}
@@ -175,9 +187,6 @@ We expect that speech embeddings will form clusters reflecting party affiliation
 
 % Your entire report has a \textbf{hard page limit of 4 pages} excluding references and the contribution statement. (I.e. any pages beyond page 4 must only contain the contribution statement and references). Appendices are \emph{not} possible. But you can put additional material, like interactive visualizations or videos, on a githunb repo (use \href{https://github.com/pnkraemer/tueplots}{links} in your pdf to refer to them). Each report has to contain \textbf{at least three plots or visualizations}, and \textbf{cite at least two references}. More details about how to prepare the report, inclucing how to produce plots, cite correctly, and how to ideally structure your github repo, will be discussed in the lecture, where a rubric for the evaluation will also be provided.
 
-
-% \bibliography{bibliography}
-\bibliographystyle{icml2025}
 
 \end{document}
 
