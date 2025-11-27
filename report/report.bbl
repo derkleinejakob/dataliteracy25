@@ -1,0 +1,49 @@
+\begin{thebibliography}{5}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Dekeyser \& Freedman(2023)Dekeyser and
+  Freedman]{dekeyser_elections_2023}
+Dekeyser, E. and Freedman, M.
+\newblock Elections, {Party} {Rhetoric}, and {Public} {Attitudes} {Toward}
+  {Immigration} in {Europe}.
+\newblock \emph{Political Behavior}, 45\penalty0 (1):\penalty0 197--209, March
+  2023.
+\newblock ISSN 0190-9320, 1573-6687.
+\newblock \doi{10.1007/s11109-021-09695-w}.
+\newblock URL \url{https://link.springer.com/10.1007/s11109-021-09695-w}.
+
+\bibitem[Hutter \& Kriesi(2022)Hutter and Kriesi]{hutter_politicising_2022}
+Hutter, S. and Kriesi, H.
+\newblock Politicising immigration in times of crisis.
+\newblock \emph{Journal of Ethnic and Migration Studies}, 48\penalty0
+  (2):\penalty0 341--365, January 2022.
+\newblock ISSN 1369-183X, 1469-9451.
+\newblock \doi{10.1080/1369183X.2020.1853902}.
+\newblock URL
+  \url{https://www.tandfonline.com/doi/full/10.1080/1369183X.2020.1853902}.
+
+\bibitem[Schwalbach(2023)]{schwalbach2023talking}
+Schwalbach, J.
+\newblock Talking to the populist radical right: A comparative analysis of
+  parliamentary debates.
+\newblock \emph{Legislative Studies Quarterly}, 48\penalty0 (2):\penalty0
+  371--397, 2023.
+
+\bibitem[Schwalbach et~al.(2025)Schwalbach, Hetzer, Proksch, Rauh, and
+  Sebők]{SDN-10.7802-2824}
+Schwalbach, J., Hetzer, L., Proksch, S.-O., Rauh, C., and Sebők, M.
+\newblock Parllawspeech.
+\newblock (Version 1.0.0) [Data set]. GESIS, Cologne.
+  https://doi.org/10.7802/2824, 2025.
+
+\bibitem[Subtil \& Verger(2024)Subtil and Verger]{subtil_verger_2024}
+Subtil, H. and Verger, V.
+\newblock Emotional rhetoric and the rise of populism in the european
+  parliament.
+\newblock Policy Brief 108, IPP, June 2024.
+
+\end{thebibliography}
