@@ -1,12 +1,10 @@
 from gensim import corpora
-from gensim.models import LdaModel, LdaMulticore
+from gensim.models import LdaMulticore
 from gensim.utils import simple_preprocess
 import spacy
 import logging
 from typing import List
 from tqdm import tqdm
-from multiprocessing import Pool
-from joblib import Parallel, delayed
 import json 
 
 def preprocess_text(nlp, document, custom_stopwords=[]):    
@@ -39,17 +37,3 @@ def process_texts(documents: List[str], custom_stopwords, test_first_k = None, o
         print(f"Topic {idx + 1}: {label}")
         
     return lda_model, processed_data
-
-#%% 
-if __name__ == "__main__":
-    import pandas as pd 
-    print("reading dataset")
-    filename = "data/parlaw/speech_output.csv"
-    df = pd.read_csv(filename)
-    df_party_members = df[~(df["party"] == "-")]
-
-#%%
-if __name__ == "__main__":
-    documents = df_party_members["translatedText"].dropna().to_list()
-
-    model = process_texts(documents, test_first_k=100, num_topics=2, n_passes=1)
