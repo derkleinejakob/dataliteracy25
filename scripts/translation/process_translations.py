@@ -78,7 +78,7 @@ def add_translations_to_df(df, translations):
             # text was in English already, copy it to translatedText
             df.at[index, "translatedText"] = df.iloc[index]["text"]
             # keep track that Gemini assumed the text was in English 
-            df.at[index, "translationSource"] = "orginial_gm"
+            df.at[index, "translationSource"] = "orginal_gm"
         else: 
             if "no translation needed" in translations[id]: 
                 # sanity check that if no translation is needed model really only has returned "no translation needed" without anything else.
