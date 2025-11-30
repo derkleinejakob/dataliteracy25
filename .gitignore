@@ -6,3 +6,4 @@ data
 # data/embeddings
 .vscode
 lda
+report/build
