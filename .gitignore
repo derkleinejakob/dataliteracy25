@@ -7,3 +7,4 @@ data
 .vscode
 lda
 report/build
+.DS_Store
