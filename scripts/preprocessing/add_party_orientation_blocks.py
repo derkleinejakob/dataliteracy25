@@ -1,6 +1,6 @@
 import pandas as pd 
 
-def load_data(filename="data/parllaw/speech_translated.csv"): 
+def add_party_orientation_blocks(filename="data/parllaw/speech_translated.csv"): 
     # import parllaw speech dataset
     df = pd.read_csv(filename)
     df["year"] = df.apply(lambda s: int(s["date"][:4]), axis=1)
