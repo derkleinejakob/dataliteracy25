@@ -8,3 +8,4 @@ data
 lda
 report/build
 .DS_Store
+scripts/__pycache__
