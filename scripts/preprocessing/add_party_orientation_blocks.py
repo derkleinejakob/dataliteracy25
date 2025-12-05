@@ -4,9 +4,9 @@ def add_party_orientation_blocks(df):
     
     Creates new column "block" with values in (left, greens, social_democratic, christian_conservative, liberal, right_populist)
     No information loss here
-    """
 
     # TODO: add data source for reasoning
+    """
 
     df['block'] = None 
 
@@ -22,7 +22,5 @@ def add_party_orientation_blocks(df):
     df.loc[df['party'].isin(['ELDR','ALDE', 'Renew']), 'block'] = 'liberal'
     # right populist
     df.loc[df['party'].isin(['EFDD', 'EFD','ITS', 'ENF', 'ID', 'IND/DEM', 'ECR', 'UEN', 'EDD']), 'block'] = 'right_populist'
-
-    # df = df.reset_index(drop=True)
     
     return df

@@ -3,10 +3,9 @@ def rename_party_duplicates(df):
     Merge parties that changed over time
     
     Changes party column
-    Information loss: because old party names are not kept
-    """
-    
+    Information loss: old party names are not kept
     # TODO add data source for reasoning
+    """
     
     df['party_adj'] = None 
 
@@ -18,11 +17,14 @@ def rename_party_duplicates(df):
     ngl_theleft = ['GUE/NGL','The Left']
     eed = ['IND/DEM','EDD']
     
-
+    # other parties that do not need to be renamed: 
+    others = ['Greens/EFA', 'UEN', 'ECR']
+    
     # make sure we handle all parties here: 
-    assert df['party'].isin([
-        *pse_snd, *ppe, *efd, *enf_id, *eldr_alde_renew, *ngl_theleft, *eed, 
-    ]).all()
+    valid_party_values = [
+        *pse_snd, *ppe, *efd, *enf_id, *eldr_alde_renew, *ngl_theleft, *eed, *others,
+    ]
+    assert df['party'].isin(valid_party_values).all(), f"Invalid party values: {df[~df['party'].isin(valid_party_values)]['party'].unique()}"
 
     df.loc[df['party'].isin(pse_snd), 'party_adj'] = 'PSE/S&D' # PSE becomes S&D
     df.loc[df['party'].isin(ppe), 'party_adj'] = 'PPE' # PPE-DE' becomes 'PPE'
