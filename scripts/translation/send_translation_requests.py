@@ -5,6 +5,7 @@ from google import genai
 import os 
 from tqdm import tqdm
 from datetime import datetime
+import optparse
     
 # %% 
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
@@ -17,7 +18,7 @@ client = genai.Client(api_key=GOOGLE_API_KEY)
 
 #%%
 
-def process_rows(df_missing, FROM_ROWS, TO_ROWS, c=True):
+def process_rows(df_missing, FILENAME, FROM_ROWS, TO_ROWS, c=True):
     """
     Create and upload requests for the passed dataframes, and create a batch job to start Gemini working on the requests.
     To control the batch size, use FROM_ROWS and TO_ROWS (will use df_missing[FROM_ROWS:TO_ROWS])
@@ -27,7 +28,6 @@ def process_rows(df_missing, FROM_ROWS, TO_ROWS, c=True):
     :param TO_ROWS: the index of row from the dataframe to end (exclusive)
     :param c: whether user has to confirm uploading the requests and creating a batch job for them by pressing enter
     """
-    FILENAME = f"df_{FROM_ROWS}_{TO_ROWS}"
     REQUESTS_PATH = f"data/translation/df/{FILENAME}.json"
     FILE_PATH = f"data/translation/file/file-{FILENAME}.json"
     JOB_FILE_PATH = f"data/translation/job/job-{FILENAME}.json"
@@ -126,52 +126,87 @@ def process_rows(df_missing, FROM_ROWS, TO_ROWS, c=True):
     
     return create_batch_job()
 
-#%%
-print("Reading data")
-df = pd.read_csv("data/parllaw/speech_output.csv")
-# keep track of original indices: 
-df = df.reset_index()
-
-# only translate speeches where speaker is member of a party because only these we need for our project
-df_missing = df[~(df["party"] == "-")]
-df_missing = df_missing[df_missing["translatedText"].isna()]
-# %%
-# NOTE: this needs to be done manually: 
-# start with index 0 and then start sending requests to the API 
-# once the rate limit is reached, wait for a while and continue with the requests. 
-# TODO: Make sure to update start_index to be the index of the first entry for which no job has been created yet.
-start_index = None # start with 0
-# %% 
-running = True 
-# try sending batches of this size, but create smaller requests once they are rejected
-DEFAULT_BATCH_SIZE = 2000
-# whether to press enter before sending requests
-force_confirm = True 
-N_RETRIES = 5
-
-current_batch_size = DEFAULT_BATCH_SIZE
-retries = N_RETRIES
-
-while running: 
-    if retries == 0: 
-        print("Too many retries. Stopping")
-        print("Continue next time at index", start_index)
-        break 
+if __name__ == "__main__": 
+    optParser = optparse.OptionParser()
+    optParser.add_option('-s', '--start_index',action='store', type='int',
+                         dest='start_index',
+                         help='Index to start sending next request from')
+    optParser.add_option('-t', '--test',action='store_true',
+                         default=False, 
+                         dest='test',
+                         help='Whether to send a test of 2000 samples which already have translations')
     
-    end_index = start_index + current_batch_size
-    print("From", start_index,"to", end_index)
-    
-    job = process_rows(df_missing, FROM_ROWS=start_index, TO_ROWS=end_index, c=force_confirm)
+    optParser.add_option('-c', '--confirm',action='store_false',
+                         default=True, 
+                         dest='confirm',
+                         help='Disable confirming each request by pressing enter.')
 
-    if job is None: 
-        print("Job failed. Trying again with fewer requests")
-        current_batch_size = current_batch_size // 2 
-        retries -= 1
+    opts, args = optParser.parse_args()
+
+    #%%
+    print("Reading data")
+    df = pd.read_csv("data/parllaw/speech_output.csv")
+    # keep track of original indices: 
+    df = df.reset_index()
+
+
+    # only translate speeches where speaker is member of a party because only these we need for our project
+    df_missing = df[~(df["party"] == "-")]
+    if opts.test:     
+        # take a sample of 2000 speeches which already have a translation
+        df_missing = df_missing[~(df_missing["translatedText"].isna())].sample(2000)
+        print("n speeches which were in english", (df_missing["text"] == df_missing["translatedText"]).sum())
+        print("n speeches which were not english", (~(df_missing["text"] == df_missing["translatedText"])).sum())
+        start_index = 0 
+        jobname = "df_test"
     else: 
-        print("Job succeeded with size", current_batch_size)
-        start_index = end_index
-        # increase batch size gradually, but never exceed DEFAULT_BATCH_SIZE
-        current_batch_size = min(current_batch_size*2, DEFAULT_BATCH_SIZE)
-        # reset number of retries
-        retries = N_RETRIES
-# %%
+        df_missing = df_missing[df_missing["translatedText"].isna()]
+        jobname = "df"
+        # NOTE: this needs to be done manually: 
+        # start with index 0 and then start sending requests to the API 
+        # once the rate limit is reached, wait for a while and continue with the requests. 
+        # TODO: Make sure to update start_index to be the index of the first entry for which no job has been created yet.
+        assert opts.start_index is not None 
+        start_index = opts.start_index # start with 0
+
+
+    # %%
+    # %% 
+    running = True 
+    # try sending batches of this size, but create smaller requests once they are rejected
+    DEFAULT_BATCH_SIZE = 2000
+    # whether to press enter before sending requests
+    force_confirm = opts.confirm
+    N_RETRIES = 5
+
+    current_batch_size = DEFAULT_BATCH_SIZE
+    retries = N_RETRIES
+
+    while running: 
+        if start_index > len(df): 
+            print("Done.")
+            break 
+
+        if retries == 0: 
+            print("Too many retries. Stopping")
+            print("Continue next time at index", start_index)
+            break 
+        
+        end_index = start_index + current_batch_size
+        print("From", start_index,"to", end_index)
+
+        filename = f"{jobname}_{start_index}_{end_index}"
+        job = process_rows(df_missing, FILENAME=filename, FROM_ROWS=start_index, TO_ROWS=end_index, c=force_confirm)
+
+        if job is None: 
+            print("Job failed. Trying again with fewer requests")
+            current_batch_size = current_batch_size // 2 
+            retries -= 1
+        else: 
+            print("Job succeeded with size", current_batch_size)
+            start_index = end_index
+            # increase batch size gradually, but never exceed DEFAULT_BATCH_SIZE
+            current_batch_size = min(current_batch_size*2, DEFAULT_BATCH_SIZE)
+            # reset number of retries
+            retries = N_RETRIES
+    # %%
