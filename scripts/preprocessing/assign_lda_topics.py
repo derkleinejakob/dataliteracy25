@@ -21,6 +21,8 @@ def assign_topics(df):
 
     lda_model = LdaMulticore.load(LDA_MODEL_PATH)
     preprocessed_data = json.load(open("data/lda/preprocessed_texts_all_translated.json"))
+    # TODO: pretty sure preprocessed_data and df are not yet aligned! we remove additional stuff from df but load old preprocessing file -> redo preprocessing?
+    assert len(preprocessed_data) == len(df), "Length of preprocessed data and dataframe do not match!"
 
     # TODO: outsource this, should be shared with LDA script
     print("Creating dictionary")
