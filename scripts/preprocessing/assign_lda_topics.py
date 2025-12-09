@@ -10,7 +10,10 @@ def assign_topics(df):
     # TODO: rerun LDA after data is cleaned and make sure preprocessed texts are now just aligned with the df
     
     N_TOPICS = 50 
-    LDA_MODEL_PATH = f"data/lda/{N_TOPICS}_topics/10/model.model"
+    LDA_MODEL_PATH = f"data/lda/final/model.model"
+    
+    PATH_DICTIONARY = "data/lda/dictionary_final.d"
+    PATH_CORPUS = "data/lda/corpus_final.c"
 
     def assign_topics(lda_model, corpus):
         topics = []
@@ -20,21 +23,9 @@ def assign_topics(df):
         return topics
 
     lda_model = LdaMulticore.load(LDA_MODEL_PATH)
-    preprocessed_data = json.load(open("data/lda/preprocessed_texts_all_translated.json"))
-    # TODO: pretty sure preprocessed_data and df are not yet aligned! we remove additional stuff from df but load old preprocessing file -> redo preprocessing?
-    assert len(preprocessed_data) == len(df), "Length of preprocessed data and dataframe do not match!"
+    dictionary = corpora.Dictionary.load(PATH_DICTIONARY)
+    corpus = corpora.MmCorpus(PATH_CORPUS)
 
-    # TODO: outsource this, should be shared with LDA script
-    print("Creating dictionary")
-    dictionary = corpora.Dictionary(preprocessed_data)
-
-    # TODO: test values
-    dictionary.filter_extremes(
-        no_below=10,     # Keep tokens appearing in at least 10 docs
-        no_above=0.4,    # Remove tokens appearing in more than 40% of docs
-        keep_n=100000    # Keep only the top 100k words by frequency
-    )
-    corpus = [dictionary.doc2bow(l) for l in tqdm(preprocessed_data, "Preparing corpus")]
 
     corpus_topics = assign_topics(lda_model, corpus)
     # set up df with topic probabilities
@@ -52,6 +43,5 @@ def assign_topics(df):
 
     # append topic probabilities to df_party_members
     # TODO: why reset_index?? 
-    
-    return pd.concat([df.reset_index(drop=True), topic_prob_df], axis=1)
-
+    # return pd.concat([df.reset_index(drop=True), topic_prob_df], axis=1)
+    return pd.concat([df, topic_prob_df], axis=1)

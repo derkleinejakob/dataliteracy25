@@ -5,7 +5,6 @@ data
 # data/party_maps
 # data/embeddings
 .vscode
-lda
 report/build
 .DS_Store
 **/__pycache__/
