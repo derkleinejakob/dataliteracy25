@@ -4,18 +4,18 @@ def rename_party_duplicates(df):
     
     Changes party column
     Information loss: old party names are not kept
-    # TODO add data source for reasoning
+    Continuities based on: W. Kaiser and J. Mittag, “Seventy years of transnational political groups in the European Parliament,” European Parliamentary Research Service, Jan. 2023.
+    URL: https://www.europarl.europa.eu/RegData/etudes/BRIE/2023/757568/EPRS_BRI(2023)757568_EN.pdf
     """
     
     df['party_adj'] = None 
 
     pse_snd = ['PSE', 'S&D']
     ppe = ['PPE-DE', 'PPE']
-    efd = ['EFDD', 'EFD']
-    enf_id = ['ITS', 'ENF', 'ID']
+    efd = ['EDD', 'IND/DEM', 'EFDD', 'EFD']
+    enf_id = ['ENF', 'ID']
     eldr_alde_renew = ['ELDR','ALDE', 'Renew']
     ngl_theleft = ['GUE/NGL','The Left']
-    eed = ['IND/DEM','EDD']
     
     # other parties that do not need to be renamed: 
     others = ['Greens/EFA', 'UEN', 'ECR']
@@ -28,11 +28,10 @@ def rename_party_duplicates(df):
 
     df.loc[df['party'].isin(pse_snd), 'party_adj'] = 'PSE/S&D' # PSE becomes S&D
     df.loc[df['party'].isin(ppe), 'party_adj'] = 'PPE' # PPE-DE' becomes 'PPE'
-    df.loc[df['party'].isin(efd), 'party_adj'] = 'EFD' # 'EFDD' becomes 'EFD'
+    df.loc[df['party'].isin(efd), 'party_adj'] = 'EDD/INDDEM/EFD' # 'EDD' becomes 'IND/DEM' becomes 'EFDD' becomes 'EFD'
     df.loc[df['party'].isin(enf_id), 'party_adj'] = 'ENF/ID' # ENF becomes ID in 2019
     df.loc[df['party'].isin(eldr_alde_renew), 'party_adj'] = 'ELDR/ALDE/Renew' # ELDR becomes ALDE becomes Renew
     df.loc[df['party'].isin(ngl_theleft), 'party_adj'] = 'NGL/The Left' # GUE/NGL becomes The Left
-    df.loc[df['party'].isin(eed), 'party_adj'] = 'INDDEM/EDD' # independents become EDD
 
 
     df.drop('party', axis=1, inplace=True)
