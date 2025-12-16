@@ -18,11 +18,11 @@ def rename_party_duplicates(df):
     ngl_theleft = ['GUE/NGL','The Left']
     
     # other parties that do not need to be renamed: 
-    others = ['Greens/EFA', 'UEN', 'ECR']
+    others = ['Greens/EFA', 'UEN', 'ECR', 'ITS']
     
     # make sure we handle all parties here: 
     valid_party_values = [
-        *pse_snd, *ppe, *efd, *enf_id, *eldr_alde_renew, *ngl_theleft, *eed, *others,
+        *pse_snd, *ppe, *efd, *enf_id, *eldr_alde_renew, *ngl_theleft, *others,
     ]
     assert df['party'].isin(valid_party_values).all(), f"Invalid party values: {df[~df['party'].isin(valid_party_values)]['party'].unique()}"
 
