@@ -73,14 +73,14 @@ def remove_from_text(original: str, strings_to_remove: list[str] ) -> str:
     return original.strip()
 
 
-def remove_commentary(df: pd.DataFrame, text_column: str) -> pd.DataFrame:
+def remove_commentary(df: pd.DataFrame, text_column = "translatedText") -> pd.DataFrame:
     commentary = extract_commentary(df, text_column=text_column)
     commentary = pd.concat(identify_removable_parts(commentary))
     commentary.name = 'commentary'
     commentary = commentary.groupby(commentary.index).agg(lambda comments: list(comments))
 
     merged = pd.merge(df, commentary, left_index=True, right_index=True, how='left')
-    merged[text_column] = merged[[text_column, 'commentary']].apply(lambda row: remove_from_text(row['english_text'], row['commentary']), axis=1)
+    merged[text_column] = merged[[text_column, 'commentary']].apply(lambda row: remove_from_text(row['translatedText'], row['commentary']), axis=1)
     return merged.drop('commentary', axis=1)
 
 

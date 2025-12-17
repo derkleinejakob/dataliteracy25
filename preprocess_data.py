@@ -1,6 +1,8 @@
 #%% 
 import pandas as pd 
-from scripts.preprocessing import remove_non_party_speeches, rename_party_duplicates, add_party_orientation_year_agenda
+from scripts.preprocessing import remove_non_party_speeches, rename_party_duplicates, add_party_orientation_year_agenda, remove_commentary
+from scripts.preprocessing.remove_duplicate_speeches import remove_duplicate_speeches
+from scripts.preprocessing.remove_commentary import remove_commentary
 from tqdm import tqdm
 
 # TODO: run through all scripts in preprocessing folder and manipulate df, then output cleaned df
@@ -12,8 +14,8 @@ if __name__ == "__main__":
     
     print("Reading dataset")
     df = pd.read_csv(IN_PATH, index_col=False)
-    # order of application matters! e.g. "rename party duplicates" should be run before "add party orientation blocks"
-    preprocessing_steps = [remove_non_party_speeches, rename_party_duplicates, add_party_orientation_year_agenda]
+    # order of application matters! e.g. "add party orientation blocks" should be run before "rename party duplicates"  
+    preprocessing_steps = [remove_non_party_speeches, add_party_orientation_year_agenda, rename_party_duplicates, remove_duplicate_speeches, remove_commentary]
 
     n_columns_before = len(df.columns)
     n_before = len(df)
