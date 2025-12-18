@@ -73,9 +73,13 @@ def remove_from_text(original: str, strings_to_remove: list[str] ) -> str:
     return original.strip()
 
 
-def remove_commentary(df: pd.DataFrame, text_column = "translatedText") -> pd.DataFrame:
+def remove_commentary(df: pd.DataFrame, text_column: str = "translatedText") -> pd.DataFrame:
+    print("extracting commentary")
     commentary = extract_commentary(df, text_column=text_column)
+    print("identifying removable parts")
     commentary = pd.concat(identify_removable_parts(commentary))
+    
+    print("removing commentary")
     commentary.name = 'commentary'
     commentary = commentary.groupby(commentary.index).agg(lambda comments: list(comments))
 
@@ -86,3 +90,7 @@ def remove_commentary(df: pd.DataFrame, text_column = "translatedText") -> pd.Da
 
 
     
+# some more pattern suggestions:
+# "the MEP"
+# "the parliament decides"
+# "the sitting is | was"
