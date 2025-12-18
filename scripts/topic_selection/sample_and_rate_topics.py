@@ -2,10 +2,11 @@ import pandas as pd
 import textwrap
 from IPython.display import clear_output
 
-def sample_and_rate_topic(df_topics, topic_id,  n_speeches = 100, seed = 42, lower_prob=0.25, upper_prob=0.45):
+def sample_and_rate(df_topics, topic_id,  n = 100, seed = 42, lower_prob=0.25, upper_prob=0.45):
     """
-    Randomly sample speeches whose topic probability is within [lower_prob, upper_prob],
-    show translatedText, and collect manual ratings (1 = belongs, 0 = not).
+    For determining thresholds
+    Randomly sample items whose probability is within [lower_prob, upper_prob],
+    collect manual ratings (1 = belongs, 0 = not).
     Returns a DataFrame with columns ['probability', 'rating'] of length n (or fewer if not enough speeches).
     """
 
