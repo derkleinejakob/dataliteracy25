@@ -33,6 +33,8 @@ def rename_party_duplicates(df):
     df.loc[df['party'].isin(eldr_alde_renew), 'party_adj'] = 'ELDR/ALDE/Renew' # ELDR becomes ALDE becomes Renew
     df.loc[df['party'].isin(ngl_theleft), 'party_adj'] = 'NGL/The Left' # GUE/NGL becomes The Left
 
+    # if it is none of the above, keep original party name
+    df.loc[df['party_adj'].isna(), 'party_adj'] = df.loc[df['party_adj'].isna(), 'party']
 
     df.drop('party', axis=1, inplace=True)
     df = df.rename(columns={'party_adj': 'party'})

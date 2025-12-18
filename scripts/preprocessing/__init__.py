@@ -1,3 +1,4 @@
 from scripts.preprocessing.add_party_orientation_year_agenda import add_party_orientation_year_agenda
 from scripts.preprocessing.remove_non_party_speeches import remove_non_party_speeches
 from scripts.preprocessing.rename_party_duplicates import rename_party_duplicates
+from scripts.preprocessing.remove_commentary import remove_commentary
