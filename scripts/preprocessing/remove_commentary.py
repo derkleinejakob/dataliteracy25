@@ -28,13 +28,12 @@ def extract_commentary(df: pd.DataFrame, text_column: str = 'text') -> pd.Series
 
 def identify_removable_parts(commentary) -> list[pd.Series]:
     # Most straightforward, take all comments that include speaker
-    speaker_commentary = commentary[commentary.str.lower().str.contains('speaker')]
+    speaker_commentary = commentary[commentary.str.lower().str.contains('speaker|mep')]
 
     # considering rest
     non_speaker_commentary = commentary[~commentary.str.lower().str.contains('speaker')]
 
-    microphone_commentary = non_speaker_commentary[(non_speaker_commentary.str.lower().str.contains('microphone')) | 
-                                                   (non_speaker_commentary.str.lower().str.contains('mic')) ]
+    microphone_commentary = non_speaker_commentary[(non_speaker_commentary.str.lower().str.contains('microphone|mic')) ]
 
     # This is all the unique bracketed texts, based on my brief scan of these texts I haven't seen anything we can discard
     leave_in = non_speaker_commentary.value_counts()[non_speaker_commentary.value_counts() == 1].index
@@ -45,21 +44,15 @@ def identify_removable_parts(commentary) -> list[pd.Series]:
 
     
     long_non_speaker_commentary = non_speaker_commentary[non_speaker_commentary.str.split().str.len() > 2]
-    applause = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.contains('applause')]
-    parliament = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('parliament')]
-    end_of = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('end of')]  # End of procedure, reports, interventions etc.
-    vote = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('explanation of vote')]
-    amendment = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('the oral amendment')]
-    president = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('the president')]
-    articles = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('article')]
-    rule = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.startswith('rule')]
-    rule_contains = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.contains('rule 1')]
-    speaking_session = long_non_speaker_commentary[long_non_speaker_commentary.str.lower().str.contains('speaking session')]
+    lowercase_longer_comments = non_speaker_commentary.str.lower()
+    contained_patterns = long_non_speaker_commentary[lowercase_longer_comments.str.contains('applause|rule 1|speaking session')]
+    repeating_commentary_beginnings = long_non_speaker_commentary[lowercase_longer_comments.str.startswith(('parliament', 'the president',
+                                                                                                     'end of', 'the oral amendment',
+                                                                                                     'explanation of vote', 'article', 'rule'))]
     # There are still 2.9K unique comments left all of them are infrequent and also seemed relevant for the context
     # I couldn't find any other patterns
     return [speaker_commentary, microphone_commentary, short_non_speaker_commentary, 
-            applause, parliament, end_of, vote, amendment, president, articles,
-            rule, rule_contains, speaking_session]
+             repeating_commentary_beginnings, contained_patterns]
 
 
 def remove_from_text(original: str, strings_to_remove: list[str] ) -> str:
