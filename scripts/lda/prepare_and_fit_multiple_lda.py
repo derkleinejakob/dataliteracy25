@@ -8,6 +8,7 @@ from typing import List
 from tqdm import tqdm
 import json 
 import pandas as pd
+import os 
 
 
 def preprocess_documents(documents: List[str], custom_stopwords=[], test_first_k = None):     
@@ -32,7 +33,7 @@ def preprocess_documents(documents: List[str], custom_stopwords=[], test_first_k
 
 def get_preprocessed_documents(preprocessed_full_path, df = None): 
     if os.path.exists(preprocessed_full_path): 
-        print("Loading preprocessed data")
+        print("Loading preprocessed data", preprocessed_full_path)
         preprocessed_data = json.load(open(preprocessed_full_path))
         # preprocessed_data = [preprocessed_data[i] for i in df_party_members.index.tolist()]  # align with filtered dataframe
         json.dump(preprocessed_data, open(preprocessed_full_path, "w+"))
@@ -47,8 +48,8 @@ def fit_models(corpus, dictionary, n_topic_values = {50: [5, 7, 10], 60: [5], 80
     runs = []
     for n_topics, n_passes_values in n_topic_values.items(): 
         for n_passes in n_passes_values: 
-            os.makedirs(f"data/lda/{n_topics}_topics/{n_passes}", exist_ok=True)
-            out_path = f"data/lda/{n_topics}_topics/{n_passes}/model.model"
+            os.makedirs(f"data/lda/screens/{n_topics}_topics/{n_passes}", exist_ok=True)
+            out_path = f"data/lda/screens/{n_topics}_topics/{n_passes}/model.model"
             workers = n_workers
 
             print("Fitting model with", n_topics, "topics and", n_passes, "passes")
@@ -62,23 +63,32 @@ if __name__ == "__main__":
     """
     Creates multiple LDA models for different topic values and n_passes
     """
-    PATH_DATA = "data/parllaw/final.csv" # TODO final dataframe
+    PATH_DATA = "data/parllaw/final.parquet"
     PATH_PREPROCESSED = "data/lda/preprocessed_texts_all_translated.json"
     PATH_DICTIONARY = "data/lda/dictionary_final.d"
     PATH_CORPUS = "data/lda/corpus_final.c"
-    df = pd.read_csv()
+
+    df = pd.read_parquet(PATH_DATA)
 
     preprocessed_data = get_preprocessed_documents(PATH_PREPROCESSED, df)
 
     print("Creating dictionary")
     dictionary = corpora.Dictionary(preprocessed_data)
     print("Filtering dictionary")
-    
+
+    n_before_filtering = len(dictionary)
+
     dictionary.filter_extremes(
         no_below=10,     # Keep tokens appearing in at least 10 speeches
-        no_above=0.4,    # Remove tokens appearing in more than 40% of speeches
-        keep_n=100000    # Keep only the top 100k words by frequency
+        no_above=0.152,    # Remove tokens appearing in more than 15.2% of speeches
+        keep_n=100000    # Here: keep all tokens, because there are only 59173 words in the dictionary
     )
+
+    n_after_filtering = len(dictionary)
+    print("Filtered dictionary: ")
+    print("Before:",n_before_filtering)
+    print("Now:", n_after_filtering, f"{'%.2f' % (n_after_filtering / n_before_filtering)}") 
+
     corpus = [dictionary.doc2bow(l) for l in tqdm(preprocessed_data, "Preparing corpus")]
 
     dictionary.save(PATH_DICTIONARY)
@@ -86,4 +96,5 @@ if __name__ == "__main__":
     corpora.MmCorpus.serialize(PATH_CORPUS, corpus)
     print("Saved corpus to", PATH_CORPUS)
 
-    fit_models(corpus, dictionary)
+    # fit_models(corpus, dictionary, {10: [5], 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
+    fit_models(corpus, dictionary, {30: [20] })#, 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})

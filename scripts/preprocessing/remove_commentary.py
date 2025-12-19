@@ -28,6 +28,7 @@ def extract_commentary(df: pd.DataFrame, text_column: str = 'text') -> pd.Series
 
 def identify_removable_parts(commentary) -> list[pd.Series]:
     # Most straightforward, take all comments that include speaker
+    print("Found", len(commentary), "bracketed comments")
     speaker_commentary = commentary[commentary.str.lower().str.contains('speaker|mep')]
 
     # considering rest
@@ -45,12 +46,14 @@ def identify_removable_parts(commentary) -> list[pd.Series]:
     
     long_non_speaker_commentary = non_speaker_commentary[non_speaker_commentary.str.split().str.len() > 2]
     lowercase_longer_comments = non_speaker_commentary.str.lower()
-    contained_patterns = long_non_speaker_commentary[lowercase_longer_comments.str.contains('applause|rule 1|speaking session')]
-    repeating_commentary_beginnings = long_non_speaker_commentary[lowercase_longer_comments.str.startswith(('parliament', 'the president',
+    contained_patterns = long_non_speaker_commentary[long_non_speaker_commentary.str.contains('applause|rule 1|speaking session')]
+    repeating_commentary_beginnings = long_non_speaker_commentary[long_non_speaker_commentary.str.startswith(('parliament', 'the parliament', 'the sitting', 'the mep', 'the president',
                                                                                                      'end of', 'the oral amendment',
                                                                                                      'explanation of vote', 'article', 'rule'))]
     # There are still 2.9K unique comments left all of them are infrequent and also seemed relevant for the context
     # I couldn't find any other patterns
+    n_residual = len(non_speaker_commentary) - len(microphone_commentary) - len(short_non_speaker_commentary) - len(contained_patterns) - len(repeating_commentary_beginnings)
+    print("Leaving",n_residual, "bracketed comments")
     return [speaker_commentary, microphone_commentary, short_non_speaker_commentary, 
              repeating_commentary_beginnings, contained_patterns]
 
@@ -67,12 +70,9 @@ def remove_from_text(original: str, strings_to_remove: list[str] ) -> str:
 
 
 def remove_commentary(df: pd.DataFrame, text_column: str = "translatedText") -> pd.DataFrame:
-    print("extracting commentary")
     commentary = extract_commentary(df, text_column=text_column)
-    print("identifying removable parts")
     commentary = pd.concat(identify_removable_parts(commentary))
     
-    print("removing commentary")
     commentary.name = 'commentary'
     commentary = commentary.groupby(commentary.index).agg(lambda comments: list(comments))
 

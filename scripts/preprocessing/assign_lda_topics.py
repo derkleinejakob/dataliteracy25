@@ -5,27 +5,13 @@ from gensim.models import LdaMulticore
 import numpy as np 
 import pandas as pd 
 
-def assign_topics(df): 
-    # TODO: this needs some fixing (index should not be reset!)
-    # TODO: rerun LDA after data is cleaned and make sure preprocessed texts are now just aligned with the df
-    
-    N_TOPICS = 50 
-    LDA_MODEL_PATH = f"data/lda/final/model.model"
-    
-    PATH_DICTIONARY = "data/lda/dictionary_final.d"
-    PATH_CORPUS = "data/lda/corpus_final.c"
-
+def assign_topics_(df, lda_model, n_topics, corpus): 
     def assign_topics(lda_model, corpus):
         topics = []
         for bow in tqdm(corpus, desc="Assigning most probable topic to each speech"):
             docs_topics = lda_model.get_document_topics(bow, minimum_probability=0)
             topics.append(docs_topics)
         return topics
-
-    lda_model = LdaMulticore.load(LDA_MODEL_PATH)
-    dictionary = corpora.Dictionary.load(PATH_DICTIONARY)
-    corpus = corpora.MmCorpus(PATH_CORPUS)
-
 
     corpus_topics = assign_topics(lda_model, corpus)
     # set up df with topic probabilities
@@ -34,14 +20,31 @@ def assign_topics(df):
     # this list is turned into dataframe of size (num_docs, num_topics) with probabilities
     num_docs = len(corpus_topics)
     
-    topic_prob_matrix = np.zeros((num_docs, N_TOPICS))
+    topic_prob_matrix = np.zeros((num_docs, n_topics))
     for doc_idx, doc_topics in enumerate(corpus_topics):
         for topic_id, prob in doc_topics:
             topic_prob_matrix[doc_idx, topic_id] = prob
             
-    topic_prob_df = pd.DataFrame(topic_prob_matrix, columns=[f"topic_{i}" for i in range(N_TOPICS)])
+    topic_prob_df = pd.DataFrame(topic_prob_matrix, columns=[f"topic_{i}" for i in range(n_topics)])
 
     # append topic probabilities to df_party_members
     # TODO: why reset_index?? 
     # return pd.concat([df.reset_index(drop=True), topic_prob_df], axis=1)
     return pd.concat([df, topic_prob_df], axis=1)
+
+def assign_topics(df): 
+    # TODO: this needs some fixing (index should not be reset!)
+    # TODO: rerun LDA after data is cleaned and make sure preprocessed texts are now just aligned with the df
+    
+    N_TOPICS = 50 
+    LDA_MODEL_PATH = f"data/lda/final/model.model"
+    
+    # PATH_DICTIONARY = "data/lda/dictionary_final.d"
+    PATH_CORPUS = "data/lda/corpus_final.c"
+
+
+    lda_model = LdaMulticore.load(LDA_MODEL_PATH)
+    # dictionary = corpora.Dictionary.load(PATH_DICTIONARY)
+    corpus = corpora.MmCorpus(PATH_CORPUS)
+
+    return assign_topics_(df, lda_model, N_TOPICS, corpus)

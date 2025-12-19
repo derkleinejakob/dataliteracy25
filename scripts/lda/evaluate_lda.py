@@ -1,10 +1,10 @@
 from gensim.models.coherencemodel import CoherenceModel
 from gensim.models import LdaMulticore
 from gensim import corpora
-
+import json 
 import os 
 
-def evaluate_model(lda_model, n_topics, k_words, corpus, dictionary, search_term = "migration", compute_coherence=True): 
+def evaluate_model(lda_model, n_topics, k_words, processed_texts, corpus, dictionary, search_term = "migration", compute_coherence=True): 
     """For the LDA model compute: 
     - coherence (a metric in LDA to express whether each word is associated with one topic (desireable, coherence => 1) or many (undesireable, coherence => 0)
     - highest probability that the search term is given in a topic
@@ -16,6 +16,7 @@ def evaluate_model(lda_model, n_topics, k_words, corpus, dictionary, search_term
         print("Computing coherence")
         coherence_model = CoherenceModel(
             model=lda_model, 
+            texts=processed_texts,
             corpus=corpus, 
             dictionary=dictionary, 
             coherence='c_v'  # most common coherence measure
@@ -46,7 +47,7 @@ def evaluate_model(lda_model, n_topics, k_words, corpus, dictionary, search_term
                 indices_relevant_topics.append(topic_index)  
 
                 label = ", ".join([f"{word} ({'%.2f' % prob})" for word, prob in topic[:k_words]])
-                print(f"Possibly relevant topic {idx + 1}: {label}")
+                print(f"Possibly relevant topic {topic_index}: {label}")
                 
     print("."*30)
     print("Coherence:", coherence_score)
@@ -61,41 +62,66 @@ def print_topics(model, n_topics, k_words=10):
         print(f"Topic {idx}: {label}")
 
 if __name__ == "__main__": 
-    MODELS_PATH = "data/lda/"
+    MODELS_PATH = "data/lda/screens"
     PATH_DICTIONARY = "data/lda/dictionary_final.d"
     PATH_CORPUS = "data/lda/corpus_final.c"
-    FINAL_MODEL_PATH = "data/lda/final/model.model"
+    COMPARISON_RESULTS_PATH = "data/lda/screens/comparison.json"
+    PATH_PREPROCESSED = "data/lda/preprocessed_texts_all_translated.json"
+
     K_WORDS = 10 # check for relevant keyword (e.g. migration) as being in most probable k words of the topic 
 
     dictionary = corpora.Dictionary.load(PATH_DICTIONARY)
     corpus = corpora.MmCorpus(PATH_CORPUS)
-    os.makedirs(FINAL_MODEL_PATH, exist_ok=True)
+    processed_texts = json.load(open(PATH_PREPROCESSED))
+
+    # os.makedirs(FINAL_MODEL_PATH, exist_ok=True)
 
     
     best_coherence = 0
     best_model = None 
     best_config = None 
 
-    for root, folder_n_topics, _ in os.walk(MODELS_PATH): 
-        n_topics = int(folder_n_topics.split("_")[0]) # assume folder is named e.g. 50_topics
-        for _, folder_n_pases, _ in os.walk(os.path.join(root, folder_n_topics)): 
-            n_passes = int(folder_n_pases) # assume folder is just named e.g. 5 for 5 passes 
-            lda_model = LdaMulticore.load(os.path.join(root, folder_n_topics, folder_n_pases, "model.model"))
-            
-            print("\n"*2)
-            print("Evaluating model with", n_topics, "topics and", n_passes, "n_passes")
+    stats = []
 
-            coherence, _, _, indices_relevant_topics = evaluate_model(lda_model, n_topics, K_WORDS, corpus, dictionary)    
+    for root, folders_n_topics, _ in os.walk(MODELS_PATH): 
+        for folder_n_topics in sorted(folders_n_topics): 
+            try: 
+                n_topics = int(folder_n_topics.split("_")[0]) # assume folder is named e.g. 50_topics
+            except: 
+                print("Could not read n_topics, skipping:", folder_n_topics)
+                continue
+            for _, folders_n_pases, _ in os.walk(os.path.join(root, folder_n_topics)): 
+                for folder_n_passes in sorted(folders_n_pases): 
+                    n_passes = int(folder_n_passes) # assume fjolder is just named e.g. 5 for 5 passes 
 
-            if not (len(indices_relevant_topics) == 1): 
-                print("Ignoring model because it does not have exactly 1 relevant topic; has:", len(indices_relevant_topics))
-            else: 
-                if coherence > best_coherence: 
-                    best_coherence = coherence
-                    best_model = lda_model 
-                    best_config = (n_topics, n_passes)
-    
-    print("Best model is", best_config, "with coherence:", best_coherence)
-    print("Best model topics:")
-    print_topics(best_model, best_config[0], K_WORDS)
-    best_model.save(FINAL_MODEL_PATH)
+                    if not os.path.exists(os.path.join(root, folder_n_topics, folder_n_passes, "model.model")): 
+                        print("Missing model", n_topics, "/", folder_n_passes)
+                        continue
+                    lda_model = LdaMulticore.load(os.path.join(root, folder_n_topics, folder_n_passes, "model.model"))
+                    
+                    print("\n"*2)
+                    print("Evaluating model with", n_topics, "topics and", n_passes, "n_passes")
+
+                    coherence, highest_prob, top_pos, indices_relevant_topics = evaluate_model(lda_model, n_topics, K_WORDS, processed_texts, corpus, dictionary)    
+                    stats.append({
+                        "n_topics": n_topics, 
+                        "n_passes": n_passes,
+                        "coherence": str(coherence),  
+                        "highest_prob": str(highest_prob), 
+                        "top_pos": top_pos, 
+                        "n_relevant_topics": len(indices_relevant_topics)
+                    })
+                    if not (len(indices_relevant_topics) == 1): 
+                        print("Ignoring model because it does not have exactly 1 relevant topic; has:", len(indices_relevant_topics))
+                    else: 
+                        if coherence is not None and coherence > best_coherence: 
+                            best_coherence = coherence
+                            best_model = lda_model 
+                            best_config = (n_topics, n_passes)
+        
+    if best_config is not None: 
+        print("Best model is", best_config, "with coherence:", best_coherence)
+        print("Best model topics:")
+        print_topics(best_model, best_config[0], K_WORDS)
+    json.dump(stats, open(COMPARISON_RESULTS_PATH, "w"))
+    # best_model.save(FINAL_MODEL_PATH)

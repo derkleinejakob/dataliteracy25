@@ -10,9 +10,9 @@ def remove_non_party_speeches(df):
 
     # only use speeches where speaker is associated with a party
     parties_to_drop = ["-", "NI", "TGI"]
-    mask_dropped_rows = df["party"].isin(parties_to_drop)
+    # mask_dropped_rows = df["party"].isin(parties_to_drop)
 
-    n_to_drop = len(df[mask_dropped_rows])
-    print(f"Removing speakers without party: {n_to_drop} ({'%.2f' % (n_to_drop/len(df))})")
+    # n_to_drop = len(df[mask_dropped_rows])
+    print(f"Removing speakers without party") #: {n_to_drop} ({'%.2f' % (n_to_drop/len(df))})")
     
-    return df[~mask_dropped_rows]
+    return df[~(df["party"].isin(parties_to_drop))]
