@@ -67,10 +67,13 @@ if __name__ == "__main__":
     PATH_PREPROCESSED = "data/lda/preprocessed_texts_all_translated.json"
     PATH_DICTIONARY = "data/lda/dictionary_final.d"
     PATH_CORPUS = "data/lda/corpus_final.c"
+    PATH_CONFIGS = "data/lda/screen_configs.json"
 
     df = pd.read_parquet(PATH_DATA)
 
     preprocessed_data = get_preprocessed_documents(PATH_PREPROCESSED, df)
+
+    configs = json.load(open(PATH_CONFIGS))
 
     print("Creating dictionary")
     dictionary = corpora.Dictionary(preprocessed_data)
@@ -97,4 +100,4 @@ if __name__ == "__main__":
     print("Saved corpus to", PATH_CORPUS)
 
     # fit_models(corpus, dictionary, {10: [5], 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
-    fit_models(corpus, dictionary, {30: [20] })#, 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
+    fit_models(corpus, dictionary, configs)#, 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
