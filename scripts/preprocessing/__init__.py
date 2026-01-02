@@ -5,3 +5,4 @@ from scripts.preprocessing.remove_commentary import remove_commentary
 from scripts.preprocessing.remove_duplicate_speeches import remove_duplicate_speeches
 from scripts.preprocessing.remove_repeating_sentences import remove_repeating_greetings, remove_repeating_endings
 from scripts.preprocessing.keep_relevant_legislation_years import keep_relevant_legislation_years
+from scripts.preprocessing.assign_lda_topics import assign_topics
