@@ -17,9 +17,9 @@ N_TOPICS = 30
 if __name__ == "__main__": 
     def save_df(dataframe, path): 
         if path.endswith(".csv"): 
-            dataframe.to_csv(path, index=False)
+            dataframe.to_csv(path)
         elif path.endswith(".parquet"): 
-            dataframe.to_parquet(path, index=False)
+            dataframe.to_parquet(path)
         else: 
             raise ValueError(f"Unknown output file ending {path}")
     
