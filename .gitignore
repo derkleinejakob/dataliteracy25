@@ -6,7 +6,7 @@ data
 # data/embeddings
 .vscode
 report/build
-.DS_Store
+**/.DS_Store
 **/__pycache__/
 tf_idf_ratings_Jakob.csv
 tf_idf_ratings_quirin.csv

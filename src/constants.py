@@ -1,3 +1,5 @@
+from tueplots.constants.color import rgb
+
 PATH_ALL_SPEECHES = "data/final/full.parquet" # formerly known as final.parquet
 PATH_MIGRATION_SPEECHES = "data/final/migration.parquet" 
 PATH_MIGRATION_SPEECHES_EMBEDDED = "data/final/migration_with_embeddings.parquet" # formerly known as SPEECH_EMBEDDINGS.parquet
@@ -25,13 +27,14 @@ COLOR_MAP_PARTY = {
     "NGL/The Left": "#8B0000",
 }
 
-COLOR_MAP_BLOCK = {
-    "left": "purple",
-    "green": "green",
-    "social_democratic": "red",
+# use Uni Tübingen corporate design? 
+COLOR_MAP_BLOCK = { 
+    "left": rgb.tue_violet,
+    "green": rgb.tue_green,
+    "social_democratic": rgb.tue_red,
     "christian_conservative": "black",
-    "liberal": "orange",
-    "(extreme)_right": "blue",
+    "liberal": rgb.tue_orange,
+    "(extreme)_right": rgb.tue_blue,
 }
 
 COLOR_MAPS = {
