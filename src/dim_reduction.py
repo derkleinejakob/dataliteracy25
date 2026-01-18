@@ -39,11 +39,12 @@ def closest_words_for_pc(k, model, vocab, probe_embs, top_n=20):
     return map_indices_to_examples(neg_idx),  map_indices_to_examples(pos_idx)
 
 
-def get_extreme_examples(df: pd.DataFrame, normalized_embeddings: np.array):
-    return df.iloc[[normalized_embeddings[:, 0].argmin().item(),
-                     normalized_embeddings[:, 0].argmax().item(),
-                    normalized_embeddings[:, 1].argmin().item(),
-                     normalized_embeddings[:, 1].argmax().item()]]
+def get_extreme_examples(df: pd.DataFrame, embeddings: np.array, top_k=10):
+    
+    return df.iloc[[embeddings[:, 0].argmin().item(),
+                     embeddings[:, 0].argmax().item(),
+                    embeddings[:, 1].argmin().item(),
+                     embeddings[:, 1].argmax().item()]]
 
 N_PCS = 100
 
@@ -70,3 +71,20 @@ def principle_component_regression(df: pd.DataFrame, target_var: str = "party",
             results[pc_1, pc_2] = pcr.score(X_pca[:, [pc_1, pc_2]], y) 
     
     return np.unravel_index(results.argmax(), shape=(N_PCS, N_PCS)), pca
+
+
+def get_weighted_aggregated_embeddings_for_each_year(df: pd.DataFrame, embedding_column: str, aggregate_on: str):
+    yearly_data = df.copy()
+    yearly_data['year'] = pd.to_datetime(df['date']).dt.year
+    groupped = yearly_data.groupby(by=[aggregate_on, 'year'])
+    aggregated_embeddings = groupped[[embedding_column, 'migration_prob']].apply(lambda row: np.stack(row[embedding_column]).T @ np.stack(row['migration_prob']) / sum(row['migration_prob'])).reset_index()
+    aggregated_embeddings.columns = [aggregate_on, 'year', embedding_column]
+    return aggregated_embeddings
+
+
+
+def get_aggregated_embeddings_for_each_year(df: pd.DataFrame, embedding_column: str, aggregate_on: str):
+    yearly_data = df.copy()
+    yearly_data['year'] = pd.to_datetime(df['date']).dt.year
+    aggregated_embeddings = yearly_data.groupby(by=[aggregate_on, 'year'])[embedding_column].agg(lambda emb: np.stack(emb).mean(axis=0) )
+    return aggregated_embeddings.reset_index()

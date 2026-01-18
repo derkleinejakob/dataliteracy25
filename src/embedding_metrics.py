@@ -1,7 +1,8 @@
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, KBinsDiscretizer
 from sklearn.cross_decomposition import PLSRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import homogeneity_score, completeness_score, v_measure_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import StratifiedKFold, train_test_split, cross_val_score
 from sklearn.cluster import KMeans
 
 import pandas as pd
@@ -75,3 +76,26 @@ def pls_coefficient_of_determination(df: pd.DataFrame, model: str, target_var: s
     pls.fit(X_train, y_train)
 
     return pls.score(X_test, y_test)
+
+
+
+def compute_predictive_power(df: pd.DataFrame, emb_model: str, target_var: str, continues: bool = False) -> np.array:
+    print(f"Predicting {target_var}")
+
+    model = LogisticRegression(max_iter=1_000)
+    X = np.stack(df[emb_model])
+    y = df[target_var]
+
+    print(f"#Classes {len(y.unique())}")
+
+    if continues:
+        y = KBinsDiscretizer(encode="ordinal").fit_transform(np.stack(y)[:, np.newaxis]).reshape(-1)
+
+    y = LabelEncoder().fit_transform(y)
+
+    cv = StratifiedKFold(n_splits=10, shuffle=True)
+    scores = cross_val_score(model, X, y, cv=cv, scoring="f1_macro")
+    print(f"Mean Macro F1: {scores.mean()}")
+    print(f"STD Macro F1: {scores.std()}")
+
+    return scores
