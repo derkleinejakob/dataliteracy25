@@ -6,7 +6,16 @@ import os
 from tqdm import tqdm
 from datetime import datetime
 import optparse
-    
+
+
+import sys
+from pathlib import Path
+
+# assume script is run from project root => path to be able to import src
+sys.path.append(str(Path.cwd()))
+
+from src.constants import PATH_RAW_DATA
+
 # %% 
 GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
 if GOOGLE_API_KEY is None: 
@@ -142,10 +151,10 @@ if __name__ == "__main__":
                          help='Disable confirming each request by pressing enter.')
 
     opts, args = optParser.parse_args()
-
+    os.makedirs("data/translation", exist_ok=True)
     #%%
     print("Reading data")
-    df = pd.read_csv("data/parllaw/speech_output.csv")
+    df = pd.read_csv(PATH_RAW_DATA)
     # keep track of original indices: 
     df = df.reset_index()
 
@@ -170,8 +179,6 @@ if __name__ == "__main__":
         start_index = opts.start_index # start with 0
 
 
-    # %%
-    # %% 
     running = True 
     # try sending batches of this size, but create smaller requests once they are rejected
     DEFAULT_BATCH_SIZE = 2000
