@@ -151,7 +151,11 @@ if __name__ == "__main__":
                          help='Disable confirming each request by pressing enter.')
 
     opts, args = optParser.parse_args()
-    os.makedirs("data/translation", exist_ok=True)
+    os.makedirs("data/translation/df", exist_ok=True)
+    os.makedirs("data/translation/failed", exist_ok=True)
+    os.makedirs("data/translation/file", exist_ok=True)
+    os.makedirs("data/translation/job", exist_ok=True)
+    os.makedirs("data/translation/results", exist_ok=True)
     #%%
     print("Reading data")
     df = pd.read_csv(PATH_RAW_DATA)
