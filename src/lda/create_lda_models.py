@@ -9,6 +9,12 @@ from tqdm import tqdm
 import json 
 import pandas as pd
 import os 
+import sys
+from pathlib import Path
+
+# assume script is run from project root => path to be able to import src
+sys.path.append(str(Path.cwd()))
+from src.constants import PATH_ALL_SPEECHES
 
 
 def preprocess_documents(documents: List[str], custom_stopwords=[], test_first_k = None):     
@@ -63,13 +69,13 @@ if __name__ == "__main__":
     """
     Creates multiple LDA models for different topic values and n_passes
     """
-    PATH_DATA = "data/parllaw/final.parquet"
+
     PATH_PREPROCESSED = "data/lda/preprocessed_texts_all_translated.json"
     PATH_DICTIONARY = "data/lda/dictionary_final.d"
     PATH_CORPUS = "data/lda/corpus_final.c"
     PATH_CONFIGS = "data/lda/screen_configs.json"
 
-    df = pd.read_parquet(PATH_DATA)
+    df = pd.read_parquet(PATH_ALL_SPEECHES)
 
     preprocessed_data = get_preprocessed_documents(PATH_PREPROCESSED, df)
 
@@ -81,6 +87,8 @@ if __name__ == "__main__":
 
     n_before_filtering = len(dictionary)
 
+    # NOTE: these thresholds were identified manually => see the corresponding notebook to see how
+    
     dictionary.filter_extremes(
         no_below=10,     # Keep tokens appearing in at least 10 speeches
         no_above=0.152,    # Remove tokens appearing in more than 15.2% of speeches
@@ -99,5 +107,5 @@ if __name__ == "__main__":
     corpora.MmCorpus.serialize(PATH_CORPUS, corpus)
     print("Saved corpus to", PATH_CORPUS)
 
-    # fit_models(corpus, dictionary, {10: [5], 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
-    fit_models(corpus, dictionary, configs)#, 20: [5], 30: [5, 10], 40: [5, 10], 50: [5, 10], 60: [5, 10], 80: [5, 10], 100: [5, 10]})
+    
+    fit_models(corpus, dictionary, configs)
