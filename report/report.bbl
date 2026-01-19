@@ -1,9 +1,18 @@
-\begin{thebibliography}{5}
+\begin{thebibliography}{8}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
   \providecommand{\doi}[1]{doi: #1}\else
   \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Brücker et~al.(2020)Brücker, Kosyakova, and
+  Vallizadeh]{brueckner_crisis_2026}
+Brücker, H., Kosyakova, Y., and Vallizadeh, E.
+\newblock Has there been a “refugee crisis”?: New insights on the recent
+  refugee arrivals in germany and their integration prospects.
+\newblock \emph{Soziale Welt}, 71\penalty0 (1/2):\penalty0 pp. 24--53, 2020.
+\newblock ISSN 00386073.
+\newblock URL \url{https://www.jstor.org/stable/27004992}.
 
 \bibitem[Dekeyser \& Freedman(2023)Dekeyser and
   Freedman]{dekeyser_elections_2023}
@@ -16,6 +25,18 @@ Dekeyser, E. and Freedman, M.
 \newblock \doi{10.1007/s11109-021-09695-w}.
 \newblock URL \url{https://link.springer.com/10.1007/s11109-021-09695-w}.
 
+\bibitem[Greussing \& Boomgaarden(2017)Greussing and
+  Boomgaarden]{greussing_shifting_2017}
+Greussing, E. and Boomgaarden, H.~G.
+\newblock Shifting the refugee narrative? {An} automated frame analysis of
+  {Europe}’s 2015 refugee crisis.
+\newblock \emph{Journal of Ethnic and Migration Studies}, 43\penalty0
+  (11):\penalty0 1749--1774, August 2017.
+\newblock ISSN 1369-183X, 1469-9451.
+\newblock \doi{10.1080/1369183X.2017.1282813}.
+\newblock URL
+  \url{https://www.tandfonline.com/doi/full/10.1080/1369183X.2017.1282813}.
+
 \bibitem[Hutter \& Kriesi(2022)Hutter and Kriesi]{hutter_politicising_2022}
 Hutter, S. and Kriesi, H.
 \newblock Politicising immigration in times of crisis.
@@ -25,6 +46,15 @@ Hutter, S. and Kriesi, H.
 \newblock \doi{10.1080/1369183X.2020.1853902}.
 \newblock URL
   \url{https://www.tandfonline.com/doi/full/10.1080/1369183X.2020.1853902}.
+
+\bibitem[Kostikova et~al.(2025)Kostikova, Pütz, Eger, Sabelfeld, and
+  Paassen]{kostikova_llm_2025}
+Kostikova, A., Pütz, O., Eger, S., Sabelfeld, O., and Paassen, B.
+\newblock {LLM} {Analysis} of 150+ years of {German} {Parliamentary} {Debates}
+  on {Migration} {Reveals} {Shift} from {Post}-{War} {Solidarity} to
+  {Anti}-{Solidarity} in the {Last} {Decade}, September 2025.
+\newblock URL \url{http://arxiv.org/abs/2509.07274}.
+\newblock arXiv:2509.07274 [cs].
 
 \bibitem[Schwalbach(2023)]{schwalbach2023talking}
 Schwalbach, J.
