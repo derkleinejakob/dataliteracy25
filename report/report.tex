@@ -6,7 +6,7 @@
 % Recommended, but optional, packages for figures and better typesetting:
 \usepackage{microtype}
 \usepackage{graphicx}
-\usepackage{subfigure}
+\usepackage{subfig}
 \usepackage{booktabs} % for professional tables
 
 \usepackage{tikz}
@@ -145,8 +145,8 @@ More fine-grained analyses of the migration discourse have revealed the use of c
 
 % Motivate the problem, situation or topic you decided to work on. Describe why it matters (is it of societal, economic, scientific value?). Outline the rest of the paper (use references, e.g.~to \Cref{sec:methods}: What kind of data you are working with, how you analyse it, and what kind of conclusion you reached. The point of the introduction is to make the reader want to read the rest of the paper.
 
-% \section{Data and Methods}\label{sec:methods}
-
+\section{Data and Methods}\label{sec:methods}
+\input{sections/2_data_methods/data_and_methods.tex}
 % In this section, describe \emph{what you did}. Roughly speaking, explain what data you worked with, how or from where it was collected, it's structure and size. Explain your analysis, and any specific choices you made in it. Depending on the nature of your project, you may focus more or less on certain aspects. If you collected data yourself, explain the collection process in detail. If you downloaded data from the net, show an exploratory analysis that builds intuition for the data, and shows that you know the data well. If you are doing a custom analysis, explain how it works and why it is the right choice. If you are using a standard tool, it may still help to briefly outline it. Cite relevant works. You can use the \verb|\citep| and \verb|\citet| commands for this purpose \citep{mackay2003information}.
 
 % % This is the template for a figure from the original ICML submission pack. In lecture 10 we will discuss plotting in detail.
