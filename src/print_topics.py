@@ -1,4 +1,4 @@
-def print_topics(model, n_topics, k_words=5):
+def print_topics(model, n_topics=30, k_words=5):
     '''
     print all n topics of the lda model 
     '''

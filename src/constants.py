@@ -7,7 +7,7 @@ PATH_VOCAB_EMBEDDED = "data/final/vocab_embeddings.parquet" # formerly known as 
 PATH_MODEL = "data/lda/final_model/model.model"
 
 COLOR_MAP_PARTY = {
-    "PSE/S&D": "#E41A1C",
+    "PSE/S\&D": "#E41A1C",
     
     "Greens/EFA": "#32CD32",
 
@@ -38,6 +38,24 @@ COLOR_MAP_BLOCK = {
     "(extreme)_right": rgb.tue_blue,
 }
 
+ORDER_BLOCK = [
+    "(extreme)_right",
+    "christian_conservative",
+    "liberal",
+    "social_democratic",
+    "green",
+    "left"
+]
+
+LEGEND_BLOCK = {
+    "left": "Left",
+    "green": "Greens",
+    "social_democratic": "Social Democrats",
+    "christian_conservative": "Conservatives",
+    "liberal": "Liberals",
+    "(extreme)_right": "(Far) Right",
+}
+
 COLOR_MAPS = {
     "party": COLOR_MAP_PARTY,
     "block": COLOR_MAP_BLOCK,
@@ -48,3 +66,69 @@ ELECTION_YEARS = [1999, 2004, 2009, 2014, 2019, 2024]
 EMBEDDING_MODEL = "google/embeddinggemma-300m"
 
 N_TOPICS = 30
+
+MIGRATION_THRESHOLD = 0.25
+MIGRATION_TOPIC_ID = 19
+TOPIC_LABELS = [
+    "EU Security / Defense", # 0
+    "Debate Etiquette / Brexit", # 1
+    "EU Finances", # 2
+    "Workers / Industry", # 3
+    "Fishing", # 4
+    "Budgetary Control", # 5
+    "Economic Development", # 6
+    "Human Rights", # 7
+    "Rule of Law", # 8
+    "Taxation", # 9
+    "Gender Equality", # 10
+    "Terror / Political Violence", # 11
+    "Food Safety", # 12
+    "Economic Crisis", # 13
+    "Climate / Energy", # 14
+    "Trade Relations", # 15
+    "International Conflicts", # 16
+    "Education / Culture", # 17
+    "Intra-European disputes", # 18
+    "Migration / Asylum", # 19
+    "Legislative Process", # 20
+    "Russia / Ukraine", # 21
+    "Social Policy / Labor", # 22
+    "Data Protection", # 23
+    "Agriculture", # 24
+    "Election Law", # 25
+    "Market Regulation", # 26
+    "Disasters / Epidemics", # 27
+    "Sanctions / Condemnations", # 28
+    "Children’s Rights" # 29
+]
+
+TOPIC_WORDS = ['security, united, common',
+ 'want, think, commissioner',
+ 'budget, fund, financial',
+ 'worker, transport, sector',
+ 'fishing, fishery, sea',
+ 'financial, committee, agency',
+ 'development, economic, strategy',
+ 'human, freedom, democracy',
+ 'law, rule, government',
+ 'tax, company, fraud',
+ 'woman, gender, equality',
+ 'attack, world, today',
+ 'health, substance, china',
+ 'bank, crisis, economic',
+ 'energy, climate, emission',
+ 'agreement, trade, council',
+ 'conflict, peace, humanitarian',
+ 'education, cultural, human',
+ 'turkey, germany, minister',
+ 'refugee, border, migration',
+ 'resolution, group, text',
+ 'ukraine, russia, russian',
+ 'social, poverty, worker',
+ 'datum, cooperation, information',
+ 'product, food, agricultural',
+ 'political, election, process',
+ 'market, regulation, service',
+ 'health, disaster, cause',
+ 'sanction, death, penalty',
+ 'child, convention, international']
