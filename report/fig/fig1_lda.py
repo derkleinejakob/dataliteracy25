@@ -8,6 +8,8 @@ from tueplots import bundles
 from tueplots.constants.color import rgb
 import src.constants as const  
 
+## TODO: subtitles like "selected topics over time" and "migration discourse over time"
+
 # import data
 df = pd.read_parquet("data/final.parquet")
 total_speeches_per_year = df.groupby('year').size().to_dict() # for ratios
@@ -49,7 +51,7 @@ ax1.set_xlabel('')
 
 # reverse legend order
 handles, labels = ax1.get_legend_handles_labels()
-ax1.legend(handles[::-1], labels[::-1], loc='upper left', frameon=True)
+ax1.legend(handles[::-1], labels[::-1], loc='upper left', frameon=True, fancybox=True, shadow=False)
 # ax1.set_title('Proportion of Speeches by Dominant Topic Over Time')
 ax1.set_xlim(df_dominant['year'].min(), df_dominant['year'].max())
 ax1.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.0%}'.replace('%', r'\%')))
@@ -116,7 +118,7 @@ fig2 = ax2.get_figure()
 fig2.savefig("report/fig/fig1_panel2.pdf")
 
 # ------- combine panels into one figure ------------------------------------------------------
-params = bundles.icml2024(nrows=2,ncols=1) # if you need multiple columns / rows, change in your script
+params = bundles.icml2024(nrows=2,ncols=1) 
 params.update({"figure.dpi": 350})
 plt.rcParams.update(params)
 
@@ -127,7 +129,7 @@ ax1_combined.set_ylabel('Proportion of Speeches')
 ax1_combined.set_xlabel('')
 # ax1_combined.set_xticklabels([])
 handles, labels = ax1_combined.get_legend_handles_labels()
-ax1_combined.legend(handles[::-1], labels[::-1], loc='upper left', frameon=True)
+ax1_combined.legend(handles[::-1], labels[::-1], loc='upper left', frameon=True, fancybox=True, shadow=False)
 ax1_combined.set_xlim(df_dominant['year'].min(), df_dominant['year'].max())
 ax1_combined.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.0%}'.replace('%', r'\%')))
 ax1_combined.set_axisbelow(True)
@@ -152,7 +154,7 @@ ax2_combined.set_xlim(2014, 2024)
 ax2_combined.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.0%}'.replace('%', r'\%')))
 ax2_combined.spines['top'].set_visible(False)
 ax2_combined.spines['right'].set_visible(False)
-fig.tight_layout()
+# fig.tight_layout()
 fig.savefig("report/fig/fig1_combined.pdf")
 
 

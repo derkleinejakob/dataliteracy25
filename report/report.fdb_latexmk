@@ -1,13 +1,13 @@
 # Fdb version 3
-["bibtex report"] 1769190371 "report.aux" "report.bbl" "report" 1769190491
+["bibtex report"] 1769264702 "report.aux" "report.bbl" "report" 1769265892
   "./icml2025.bst" 1731191310 27147 88eb4aed280e585571f8eac50f39a681 ""
   "bibliography.bib" 1768821388 33810 34bfe2ac97529b18b16921e215007673 ""
-  "report.aux" 1769190491 2876 56f5941a1e87bd6352b582b3964915a6 "pdflatex"
+  "report.aux" 1769265892 3349 09cb69450c4a601d7de487d226353fae "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
-["pdflatex"] 1769190490 "/Users/Quirin/Documents/QDS/data literacy/dataliteracy25/report/report.tex" "report.pdf" "report" 1769190491
-  "/Users/Quirin/Documents/QDS/data literacy/dataliteracy25/report/report.tex" 1769190370 13417 8cba5d91773ff6d3e257d31a4244bbfe ""
+["pdflatex"] 1769265891 "/Users/Quirin/Documents/QDS/data literacy/dataliteracy25/report/report.tex" "report.pdf" "report" 1769265892
+  "/Users/Quirin/Documents/QDS/data literacy/dataliteracy25/report/report.tex" 1769265891 13994 87deea71f8140c25a15724d4ee4439e4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -27,6 +27,7 @@
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1246382020 908 2921f8a10601f252058503cc6570e581 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
+  "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb" 1136849748 45758 19968a0990191524e34e1994d4a31cb6 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb" 1136849748 44729 811d6c62865936705a31c797a1d5dada ""
@@ -190,12 +191,13 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1677666793 2826437 8203f3809213e80aee148624a6893c5d ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "fig/fig1_combined.pdf" 1769190490 84848 f74113a26134264822033dbe720ac940 ""
+  "fig/fig1_combined.pdf" 1769265843 84855 891787f940ad9dcfc9166e4f5e5b4ad4 ""
+  "fig/fig4_search.pdf" 1769265884 123058 9cf5870d332d4e373b171109101af599 ""
   "icml2025.sty" 1760510271 28189 eee44db43f4d76f4406d2dacd0778b2b ""
-  "report.aux" 1769190491 2876 56f5941a1e87bd6352b582b3964915a6 "pdflatex"
-  "report.bbl" 1769190372 5734 796445bf590666faf944b7c6bb01d1be "bibtex report"
+  "report.aux" 1769265892 3349 09cb69450c4a601d7de487d226353fae "pdflatex"
+  "report.bbl" 1769264703 5734 796445bf590666faf944b7c6bb01d1be "bibtex report"
   "report.out" 0 -1 0 "pdflatex"
-  "report.tex" 1769190370 13417 8cba5d91773ff6d3e257d31a4244bbfe ""
+  "report.tex" 1769265891 13994 87deea71f8140c25a15724d4ee4439e4 ""
   (generated)
   "report.aux"
   "report.log"
