@@ -14,8 +14,9 @@ sys.path.append(str(project_root))
 os.chdir(project_root)
 
 # Hennigs version from plotting lecture:
-plt.rcParams.update(bundles.icml2024())
-
+params = bundles.icml2024() # if you need multiple columns / rows, change in your script
+params.update({"figure.dpi": 350})
+plt.rcParams.update(params)
 # jakobs version:
 # inspired by Prof. Hennig's preamble: set matplotlib's default to Uni Tübingen's params
 # plt.rcParams.update(bundles.beamer_moml())

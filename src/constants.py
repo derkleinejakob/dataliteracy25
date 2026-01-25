@@ -3,6 +3,7 @@ from tueplots.constants.color import rgb
 PATH_ALL_SPEECHES = "data/final/full.parquet" # formerly known as final.parquet
 PATH_MIGRATION_SPEECHES = "data/final/migration.parquet" 
 PATH_MIGRATION_SPEECHES_EMBEDDED = "data/final/migration_with_embeddings.parquet" # formerly known as SPEECH_EMBEDDINGS.parquet
+PATH_MIGRATION_SPEECHES_SIMILARITIES = "data/final/migration_with_similarities.parquet"
 PATH_VOCAB_EMBEDDED = "data/final/vocab_embeddings.parquet" # formerly known as VOCAB_EMBEDDGINGS.parquet
 PATH_MODEL = "data/lda/final_model/model.model"
 

@@ -142,7 +142,7 @@ More fine-grained analyses of the migration discourse have revealed the use of c
 
 This report provides a quantitative assessment of how the growing prominence of right-wing populism and immigration as a salient political issue manifests in debates in the European Parliament, with potential implications for broader societal discourse and legislative outcomes. All parliamentary speeches between 2004 and 2024 as recorded by the ParlLawSpeech dataset inform the analyses. 
 
-Speeches are first classified into topics using Latent Dirichlet Allocation (LDA) to identify immigration-related debate and to estimate its prominence over time. Analyses of the distribution of migration-related speeches across predefined debate agendas provide quantitative evidence consistent with agenda-setting strategies employed by right-wing populist groups. With the use of speech embeddings, we examine the semantic dimensions along which party groups can be differentiated and find evidence for an increasing use of previously identified anti-immigrant and populist narratives by right-wing politicians.
+Speeches are first classified into topics using Latent Dirichlet Allocation (LDA) to identify immigration-related debate and to estimate its prominence over time. Analyses of the distribution of migration-related speeches across predefined debate agendas provide quantitative evidence consistent with agenda-setting strategies employed by right-wing populist groups. With the use of speech embeddings, we examine the semantic dimensions along which party groups can be differentiated and find evidence for an increased use of previously identified anti-immigration narratives by right-wing groups compared to moderate factions.
 
 % Motivate the problem, situation or topic you decided to work on. Describe why it matters (is it of societal, economic, scientific value?). Outline the rest of the paper (use references, e.g.~to \Cref{sec:methods}: What kind of data you are working with, how you analyse it, and what kind of conclusion you reached. The point of the introduction is to make the reader want to read the rest of the paper.
 
@@ -190,8 +190,10 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 \vskip 0.2in
 \begin{center}
 \centerline{\includegraphics[width=\columnwidth]{"fig/fig1_combined.pdf"}}
-\caption{}
-\label{fig:fig1_combined}
+\caption{\textbf{Top:} Prevalence of selected topics in European Parliament debates over the past decade, as identified by LDA topic modeling (see repository for an interactive version with all topics).
+\textbf{Bottom:} Proportional contributions of political groups to migration topic. In both panels, proportions are computed by dividing by the total number of speeches per year.}
+
+\label{fig:fig1_lda}
 \end{center}
 \vskip -0.2in
 \end{figure}
@@ -215,6 +217,16 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 
 
 
+
+\begin{figure*}[ht]
+\vskip 0.2in
+\begin{center}
+\centerline{\includegraphics[width=\textwidth]{"fig/fig4_search.pdf"}}
+\caption{}
+\label{fig:fig4_search}
+\end{center}
+\vskip -0.2in
+\end{figure*}
 
 % In this section outline your results. At this point, you are just stating the outcome of your analysis. You can highlight important aspects (``we observe a significantly higher value of $x$ over $y$''), but leave interpretation and opinion to the next section. This section absoultely \emph{must} include at least two figures.
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  25 JAN 2026 15:24
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2026.1.24)  25 JAN 2026 15:47
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -740,14 +740,27 @@ Package pdftex.def Info: fig/fig1_combined.pdf  used on input line 192.
 <fig/fig3.pdf, id=68, 487.71927pt x 301.46915pt>
 File: fig/fig3.pdf Graphic file (type pdf)
 <use fig/fig3.pdf>
-Package pdftex.def Info: fig/fig3.pdf  used on input line 203.
+Package pdftex.def Info: fig/fig3.pdf  used on input line 205.
 (pdftex.def)             Requested size: 487.8225pt x 301.55121pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 
-(./report.bbl
+
+
+[2
+pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.215 
+       <./fig/fig1_combined.pdf>]
+<fig/fig4_search.pdf, id=97, 487.71927pt x 100.35205pt>
+File: fig/fig4_search.pdf Graphic file (type pdf)
+<use fig/fig4_search.pdf>
+Package pdftex.def Info: fig/fig4_search.pdf  used on input line 224.
+(pdftex.def)             Requested size: 487.8225pt x 100.37935pt.
+ (./report.bbl
 LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 13.
  (/usr/local/texlive/2025/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
@@ -757,16 +770,6 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-
-
-[2
-pdfTeX warning (ext4): destination with the same identifier (name{figure.1}) has been already used, duplicate ignored
-<argument> ...shipout:D \box_use:N \l_shipout_box 
-                                                  \__shipout_drop_firstpage_...
-l.14 
-      <./fig/fig1_combined.pdf>]
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 39--45
@@ -802,9 +805,20 @@ Overfull \hbox (22.42252pt too wide) in paragraph at lines 77--83
 
 
 
-)
 
-[4] (./report.aux)
+
+[4
+pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) has been already used, duplicate ignored
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  \__shipout_drop_firstpage_...
+l.134 
+       <./fig/fig4_search.pdf>])
+
+
+
+[5
+
+] (./report.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -813,18 +827,18 @@ Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26860 strings out of 473190
- 498991 string characters out of 5715800
+ 26878 strings out of 473190
+ 499329 string characters out of 5715800
  930004 words of memory out of 5000000
- 49423 multiletter control sequences out of 15000+600000
- 585756 words of font info for 202 fonts, out of 8000000 for 9000
+ 49433 multiletter control sequences out of 15000+600000
+ 585991 words of font info for 206 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,11n,91p,1222b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (4 pages, 213821 bytes).
+</usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (5 pages, 257068 bytes).
 PDF statistics:
- 202 PDF objects out of 1000 (max. 8388607)
- 160 compressed objects within 2 object streams
- 32 named destinations out of 1000 (max. 500000)
- 43031 words of extra memory for PDF output out of 51595 (max. 10000000)
+ 221 PDF objects out of 1000 (max. 8388607)
+ 176 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 43036 words of extra memory for PDF output out of 51595 (max. 10000000)
 

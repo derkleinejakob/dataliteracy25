@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex report"] 1769342630.04463 "report.aux" "report.bbl" "report" 1769351092.81121 0
+["bibtex report"] 1769352433.03171 "report.aux" "report.bbl" "report" 1769352434.39069 0
   "./bibliography.bib" 1769340739.28287 39173 590d0ec9987d8446b718b27f756d2d15 ""
   "./icml2025.bst" 1768562259.24047 27147 88eb4aed280e585571f8eac50f39a681 ""
-  "report.aux" 1769351092.5001 4006 d35fa824ae2a4f5b151649e555515c5f "pdflatex"
+  "report.aux" 1769352434.12263 4485 419d77c725a5d298484da7b336e1d4d9 "pdflatex"
   (generated)
   "report.bbl"
   "report.blg"
   (rewritten before read)
-["pdflatex"] 1769351088.64497 "/Users/nargizi/Desktop/Uni/Masters/Data Literacy/dataliteracy25/report/report.tex" "report.pdf" "report" 1769351092.81136 0
-  "/Users/nargizi/Desktop/Uni/Masters/Data Literacy/dataliteracy25/report/report.tex" 1769351072.93152 18085 b759d614270fae2ef4c5b3eea0b6e0a0 ""
+["pdflatex"] 1769352433.15991 "/Users/nargizi/Desktop/Uni/Masters/Data Literacy/dataliteracy25/report/report.tex" "report.pdf" "report" 1769352434.39084 0
+  "/Users/nargizi/Desktop/Uni/Masters/Data Literacy/dataliteracy25/report/report.tex" 1769352428.03052 18662 97aa3613e45155a50c93da363640fc47 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/enc/dvips/base/8r.enc" 1165713224 4850 80dc9bab7f31fb78a000ccfed0e27cab ""
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm" 1136768653 960 379cc0019370a9e0208a0a3f949f847a ""
@@ -28,6 +28,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm" 1246382020 908 2921f8a10601f252058503cc6570e581 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm5.tfm" 1246382020 940 75ac932a52f80982a9f8ea75d03a34cf ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm" 1246382020 940 228d6584342e91276bf566bcf9716b83 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb" 1248133631 37166 8ab3487cbe3ab49ebce74c29ea2418db ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb" 1248133631 32734 69e00a6b65cedb993666e42eedb3d48f ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1248133631 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "/usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1248133631 32587 1788b0c1c5b39540c96f5e42ccd6dae8 ""
@@ -191,13 +192,14 @@
   "/usr/local/texlive/2025/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1769274380 5467155 19efa205003f9ecad95fbbaa6ff24da1 ""
   "/usr/local/texlive/2025/texmf-var/web2c/pdftex/pdflatex.fmt" 1769274298 3345738 e0c7139f7ac21f88985b57c315bf0b9e ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "fig/fig1_combined.pdf" 1769255664.43453 84848 f74113a26134264822033dbe720ac940 ""
+  "fig/fig1_combined.pdf" 1769352339.23842 84855 891787f940ad9dcfc9166e4f5e5b4ad4 ""
   "fig/fig3.pdf" 1769350930.08789 128993 39e8eda9cff57dc2ba3eeccf04f113a9 ""
+  "fig/fig4_search.pdf" 1769352345.41934 123058 9cf5870d332d4e373b171109101af599 ""
   "icml2025.sty" 1768562259.24062 28189 eee44db43f4d76f4406d2dacd0778b2b ""
-  "report.aux" 1769351092.5001 4006 d35fa824ae2a4f5b151649e555515c5f "pdflatex"
-  "report.bbl" 1769342631.05836 9525 43f9bc66f87043d505ce6e22fcb1c077 "bibtex report"
-  "report.out" 1769351090.68098 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "report.tex" 1769351072.93152 18085 b759d614270fae2ef4c5b3eea0b6e0a0 ""
+  "report.aux" 1769352434.12263 4485 419d77c725a5d298484da7b336e1d4d9 "pdflatex"
+  "report.bbl" 1769352433.15656 9525 43f9bc66f87043d505ce6e22fcb1c077 "bibtex report"
+  "report.out" 1769352433.85548 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "report.tex" 1769352428.03052 18662 97aa3613e45155a50c93da363640fc47 ""
   (generated)
   "report.aux"
   "report.log"
