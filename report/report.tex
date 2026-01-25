@@ -146,6 +146,7 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 
 % Motivate the problem, situation or topic you decided to work on. Describe why it matters (is it of societal, economic, scientific value?). Outline the rest of the paper (use references, e.g.~to \Cref{sec:methods}: What kind of data you are working with, how you analyse it, and what kind of conclusion you reached. The point of the introduction is to make the reader want to read the rest of the paper.
 
+
 \section{Data and Methods}\label{sec:methods}
 
 % In this section, describe \emph{what you did}. Roughly speaking, explain what data you worked with, how or from where it was collected, it's structure and size. Explain your analysis, and any specific choices you made in it. Depending on the nature of your project, you may focus more or less on certain aspects. If you collected data yourself, explain the collection process in detail. If you downloaded data from the net, show an exploratory analysis that builds intuition for the data, and shows that you know the data well. If you are doing a custom analysis, explain how it works and why it is the right choice. If you are using a standard tool, it may still help to briefly outline it. Cite relevant works. You can use the \verb|\citep| and \verb|\citet| commands for this purpose \citep{mackay2003information}.
@@ -167,6 +168,22 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 % % \vskip -0.2in
 % % \end{figure}
 
+\subsection{Data Cleanup}
+    We detect high amount of superfluous commentary in transliterated speeches:  markers of the original language, background incidents, and procedural notes. These markers might be source of unwanted bias, which we want to avoid. Fortunately they are predominantly located within parentheses and can be easily removed with rule-based methods. We also observe substantial redundency in the openning and closing sections of the speeches. 
+    These sections follow similar rhetorical structures but exhibit substantial lexical variation. To identify low-impact sentences we use TF-IDF algorithm to score the amount of information they contain.
+    We construct separate corpora for opening and closing sentences, and an average TF-IDF score is computed for each sentence. [TODO: Explain how we found cuttoff point] 
+
+\subsection{Semantic Embeddings}
+    Semantic embeddings have been widely used in political text analysis \citep{Miok2024, Nanni2021, Rudkowsky2018}. Our aim is to capture patterns in how different political groups address migration. We select candidate embedding models from the MTEB leaderboard \citep{enevoldsen2025mmtebmassivemultilingualtext}, based on overall performance and parameter count. Final model selection is based on (i) intra- and interparty cosine similarities, (ii) predictive performance of a logistic regression model with political affiliation as our target variable, and (iii) Kmeans clustering quality measured by homogenity and completeness.
+
+    A key concern is that general-purpose semantic embeddings may be primarly capturing stylistic and topical variations and subsequently political group ideologies influence on the embeddings might be neglegible. We test whether intra- and interparty similarity distributions differ substantially with a two-sample Kolmogorov-Smirnov test.
+
+    We examine whether party affiliations are encoded in speech embeddings and how these patterns evolve over time. Dimensionality reduction has been used to ascertain parties ideological shift over time and to reveal underlying political dimension with word associations for each reduced axis  \citep{Rheault2020-mr}. Exploratory analysis showed that, although party influence is present, it is not the defining factor of our semantic embeddings. To better understand how party affiliations manifest in the vector space, we aim to identify a subspace of the embedding space in which political and ideological differences become more salient.
+
+    To this end, Instead of simply using PCA, we employ Partial Least Squares (PLS). PLS allows us to find directions in the embedding space that are maximally associated with party labels, making it suitable for uncovering latent political dimensions that are not necessarily dominant in the overall variance of the data.
+
+   
+
 \section{Results}\label{sec:results}
 
 \begin{figure}[ht]
@@ -178,6 +195,26 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 \end{center}
 \vskip -0.2in
 \end{figure}
+
+
+\begin{figure*}[ht]
+\vskip 0.2in
+\centering
+\centerline{\includegraphics[width=\linewidth]{"fig/fig3.pdf"}}
+\caption{ \textbf{Left.} Position of each political group  \textbf{Right.} Movement of political groups over the time displayed separately for each dimension  }\label{fig:fig3_pls} 
+\vskip -0.2in
+\end{figure*}
+
+    [Should this be in Discussion???]While a clear interpretation of the underlying political dimensions requires substantial domain knowledge, we believe that combining word associations with extreme examples of speeches along each cardinal direction provides strong clues about their connotations.
+    Based on this analysis, we interpret the first PLS axis as a \textbf{conciliatory $\Leftrightarrow$  oppositional} discourse spectrum, and the second axis as a \textbf{moral / human-rights $\Leftrightarrow$ pragmatic-benefits} debate \autoref{fig:fig3_pls}.
+
+    Moral outrage and discussion of human rights violations have been consistently key aspects of both green-left blocks and parts of the right block. Along the first axis, we observe little to no movement over the years overall, suggesting that political blocks have largely maintained their characteristic way of conducting discourse. Nevertheless, there is a clear division between centrist and oppositional blocks, with greens often positioned in between. Oppositional blocks exhibit adversarial framing and conflict-driven rhetoric, whereas centrist blocks focus more on consensus-building.
+    On the second axis, we observe a clear shift along the ethical–pragmatic spectrum. Between 2016 and 2020, many parties move from pragmatic policy framing towards more moral debates. Christian conservative and right-wing blocks remain closer to the axis center, while green and left blocks maintain stronger positions on the moral end of the spectrum.
+
+
+
+
+
 
 % In this section outline your results. At this point, you are just stating the outcome of your analysis. You can highlight important aspects (``we observe a significantly higher value of $x$ over $y$''), but leave interpretation and opinion to the next section. This section absoultely \emph{must} include at least two figures.
 
