@@ -5,10 +5,10 @@ from gensim.models import LdaMulticore
 import numpy as np 
 import pandas as pd 
 import os 
-
+from src.constants import N_TOPICS
 
 FINAL_MODEL_PATH = "data/lda/final_model/model.model"
-FINAL_N_TOPICS = 30 
+PATH_CORPUS = "data/lda/corpus_final.c"
 
 def assign_topics_(df, lda_model, n_topics, corpus): 
     def assign_topics(lda_model, corpus):
@@ -37,11 +37,7 @@ def assign_topics_(df, lda_model, n_topics, corpus):
     return pd.concat([df, topic_prob_df], axis=1)
 
 def assign_topics(df): 
-    # TODO: this needs some fixing (index should not be reset!)
     # TODO: rerun LDA after data is cleaned and make sure preprocessed texts are now just aligned with the df
-    
-    # PATH_DICTIONARY = "data/lda/dictionary_final.d"
-    PATH_CORPUS = "data/lda/corpus_final.c"
 
     if not os.path.exists(FINAL_MODEL_PATH): 
         print("No LDA model found. Not assigning topics yet. Create LDA model with intermediate dataset and find topic threshold, then re-run preprocessing.")
@@ -52,4 +48,4 @@ def assign_topics(df):
     # dictionary = corpora.Dictionary.load(PATH_DICTIONARY)
     corpus = corpora.MmCorpus(PATH_CORPUS)
 
-    return assign_topics_(df, lda_model, FINAL_N_TOPICS, corpus)
+    return assign_topics_(df, lda_model, N_TOPICS, corpus)

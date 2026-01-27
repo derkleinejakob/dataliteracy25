@@ -124,4 +124,3 @@ if __name__ == "__main__":
         print("Best model topics:")
         print_topics(best_model, best_config[0], K_WORDS)
     json.dump(stats, open(COMPARISON_RESULTS_PATH, "w"))
-    # best_model.save(FINAL_MODEL_PATH)

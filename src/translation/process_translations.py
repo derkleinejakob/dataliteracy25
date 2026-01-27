@@ -6,16 +6,22 @@ import os
 from tqdm import tqdm 
 import optparse
 
+import sys
+from pathlib import Path
 
-# GOOGLE_API_KEY = os.environ.get('GOOGLE_API_KEY')
-GOOGLE_API_KEY = "AIzaSyC75OljwVR4xoHouk6Ji-Dgfu3pgMQb508"
-if GOOGLE_API_KEY is None: 
-    raise ValueError("Missing API key")
+# assume script is run from project root => path to be able to import src
+sys.path.append(str(Path.cwd()))
+from src.constants import PATH_RAW_DATA, PATH_TRANSLATED_DATA, PATH_DF_TRANSLATION_TEST
 
-client = genai.Client(api_key=GOOGLE_API_KEY)
 def load_job(job_file_path, results_path): 
     """Assumes the job_name is saved in JOB_FILE_PATH. Downloads Gemini's responses if job is done and saves them in a RESULTS_PATH jsonl file"""
     
+    global client
+    if client is None: 
+        api_key = os.environ.get('GOOGLE_API_KEY')
+        assert api_key is not None, "Missing API key"
+        client = client if client is not None else genai.Client(api_key=api_key)
+
     job_name = json.load(open(job_file_path))["job_name"]
     batch_job = client.batches.get(name=job_name)
     if batch_job.state.name == "JOB_STATE_SUCCEEDED":        
@@ -104,13 +110,11 @@ if __name__ == "__main__":
 
     opts, _ = optParser.parse_args()
     include_tests = opts.test
-
-
-    path_in = "data/parllaw/speech_output.csv"
-    path_out = "data/translation/df_translated.csv"
+    path_out = PATH_TRANSLATED_DATA
+    
     #%%
     print("Reading data")
-    df = pd.read_csv(path_in)
+    df = pd.read_csv(PATH_RAW_DATA)
     df = df.reset_index()
     # %%
     # create new column translationSource
@@ -121,7 +125,7 @@ if __name__ == "__main__":
     df.loc[df['translationInSpeech'] == True, 'translationSource'] = "machine_pl"
 
     if include_tests: 
-        path_out = "data/translation/df_translated_with_tests.csv"
+        path_out = PATH_DF_TRANSLATION_TEST
         df["translationTest"] = None
         df["translationTestSource"] = None
 
@@ -136,8 +140,9 @@ if __name__ == "__main__":
             job_name = f[4:]
             job_name = job_name[:-5]
             
-            if "test" in job_name and not include_tests:
-                print("Skipping test job:", job_name)
+            is_test = "test" in job_name 
+            if (is_test and not include_tests) or (not is_test and include_tests): 
+                print("Skipping job:", job_name)
                 continue
 
             job_file_path = root+"/"+f
@@ -152,29 +157,25 @@ if __name__ == "__main__":
                     continue
             translations, tokens = process_responses(results_path)
             total_tokens += tokens
-            add_translations_to_df(df, translations, ("test" in job_name))
+            add_translations_to_df(df, translations, is_test)
             
     print("pending:", pending)
     print("total tokens:", (total_tokens/10e5),"million")
 
-    #%%
-    missing_transl = df[~(df["party"] == "-") & (df["translatedText"].isna())]
-    translated = df[df["translationSource"].isin(["machine_gm", "original_gm"])]
+    if pending > 0: 
+        print("Wait for pending jobs")
+        exit(0)
+    if opts.test:
+        df = df[~(df["translationTest"].isna())]
+    else: 
+        missing_transl = df[~(df["party"] == "-") & (df["translatedText"].isna())]
+        translated = df[df["translationSource"].isin(["machine_gm", "original_gm"])]
 
-    not_translated = missing_transl[missing_transl["translationSource"].isna()]
-    print("still missing translation: ", len(not_translated))
+        not_translated = missing_transl[missing_transl["translationSource"].isna()]
+        print("still missing translation: ", len(not_translated))
 
-    # # Show some translations:
-    # for i, r in translated.sample(10).iterrows():
-    #     # print some samples 
-    #     print(r["text"][:1000])
-    #     if r["translationSource"] == "machine_gm": 
-    #         print(r["translatedText"][:1000])
-    #     else: 
-    #         print("*Text is in English*")
-    #     print("-"*10)
     # %%
     df.drop("translationInSpeech", axis=1, inplace=True)
     df.drop("index", axis=1, inplace=True)
-    df.to_csv(path_out, index=False)
-    # %%
+    df.to_parquet(path_out, index=False)
+    print("Written data to", path_out)

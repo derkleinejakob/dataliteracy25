@@ -1,5 +1,9 @@
 from tueplots.constants.color import rgb
 
+PATH_RAW_DATA = "data/intermed/speech_output.csv"
+PATH_TRANSLATED_DATA = "data/intermed/speech_translated.parquet"
+PATH_DF_TRANSLATION_TEST = "data/translation/df_translation_test.parquet"
+
 PATH_ALL_SPEECHES = "data/final/full.parquet" # formerly known as final.parquet
 PATH_MIGRATION_SPEECHES = "data/final/migration.parquet" 
 PATH_MIGRATION_CHES = "data/final/migration_with_ches.parquet"
