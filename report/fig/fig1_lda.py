@@ -11,7 +11,7 @@ import src.constants as const
 ## TODO: subtitles like "selected topics over time" and "migration discourse over time"
 
 # import data
-df = pd.read_parquet("data/final.parquet")
+df = pd.read_parquet(const.PATH_ALL_SPEECHES)
 total_speeches_per_year = df.groupby('year').size().to_dict() # for ratios
 
 # --- panel 1: number of speeches assigned to several selected topics plotted over time ---------------------------------
@@ -154,6 +154,15 @@ ax2_combined.set_xlim(2014, 2024)
 ax2_combined.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.0%}'.replace('%', r'\%')))
 ax2_combined.spines['top'].set_visible(False)
 ax2_combined.spines['right'].set_visible(False)
+
+# add arrow annotation
+ax1_combined.annotate(
+    '', 
+    xy=(0.55, 0.50), xycoords='figure fraction', 
+    xytext=(0.55, 0.58), textcoords='figure fraction',
+    arrowprops=dict(color='#440154', lw=1)
+)
+
 # fig.tight_layout()
 fig.savefig("report/fig/fig1_combined.pdf")
 

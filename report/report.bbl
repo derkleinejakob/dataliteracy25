@@ -1,4 +1,4 @@
-\begin{thebibliography}{13}
+\begin{thebibliography}{19}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
 \expandafter\ifx\csname urlstyle\endcsname\relax
@@ -19,6 +19,37 @@ Dekeyser, E. and Freedman, M.
 \newblock ISSN 0190-9320, 1573-6687.
 \newblock \doi{10.1007/s11109-021-09695-w}.
 \newblock URL \url{https://link.springer.com/10.1007/s11109-021-09695-w}.
+
+\bibitem[Enevoldsen et~al.(2025)Enevoldsen, Chung, Kerboua, Kardos, Mathur,
+  Stap, Gala, Siblini, Krzemiński, Winata, Sturua, Utpala, Ciancone,
+  Schaeffer, Sequeira, Misra, Dhakal, Rystrøm, Solomatin, Ömer Çağatan,
+  Kundu, Bernstorff, Xiao, Sukhlecha, Pahwa, Poświata, GV, Ashraf, Auras,
+  Plüster, Harries, Magne, Mohr, Hendriksen, Zhu, Gisserot-Boukhlef, Aarsen,
+  Kostkan, Wojtasik, Lee, Šuppa, Zhang, Rocca, Hamdy, Michail, Yang, Faysse,
+  Vatolin, Thakur, Dey, Vasani, Chitale, Tedeschi, Tai, Snegirev, Günther,
+  Xia, Shi, Lù, Clive, Krishnakumar, Maksimova, Wehrli, Tikhonova, Panchal,
+  Abramov, Ostendorff, Liu, Clematide, Miranda, Fenogenova, Song, Safi, Li,
+  Borghini, Cassano, Su, Lin, Yen, Hansen, Hooker, Xiao, Adlakha, Weller,
+  Reddy, and Muennighoff]{enevoldsen2025mmtebmassivemultilingualtext}
+Enevoldsen, K., Chung, I., Kerboua, I., Kardos, M., Mathur, A., Stap, D., Gala,
+  J., Siblini, W., Krzemiński, D., Winata, G.~I., Sturua, S., Utpala, S.,
+  Ciancone, M., Schaeffer, M., Sequeira, G., Misra, D., Dhakal, S., Rystrøm,
+  J., Solomatin, R., Ömer Çağatan, Kundu, A., Bernstorff, M., Xiao, S.,
+  Sukhlecha, A., Pahwa, B., Poświata, R., GV, K.~K., Ashraf, S., Auras, D.,
+  Plüster, B., Harries, J.~P., Magne, L., Mohr, I., Hendriksen, M., Zhu, D.,
+  Gisserot-Boukhlef, H., Aarsen, T., Kostkan, J., Wojtasik, K., Lee, T.,
+  Šuppa, M., Zhang, C., Rocca, R., Hamdy, M., Michail, A., Yang, J., Faysse,
+  M., Vatolin, A., Thakur, N., Dey, M., Vasani, D., Chitale, P., Tedeschi, S.,
+  Tai, N., Snegirev, A., Günther, M., Xia, M., Shi, W., Lù, X.~H., Clive, J.,
+  Krishnakumar, G., Maksimova, A., Wehrli, S., Tikhonova, M., Panchal, H.,
+  Abramov, A., Ostendorff, M., Liu, Z., Clematide, S., Miranda, L.~J.,
+  Fenogenova, A., Song, G., Safi, R.~B., Li, W.-D., Borghini, A., Cassano, F.,
+  Su, H., Lin, J., Yen, H., Hansen, L., Hooker, S., Xiao, C., Adlakha, V.,
+  Weller, O., Reddy, S., and Muennighoff, N.
+\newblock Mmteb: Massive multilingual text embedding benchmark.
+\newblock \emph{arXiv preprint arXiv:2502.13595}, 2025.
+\newblock \doi{10.48550/arXiv.2502.13595}.
+\newblock URL \url{https://arxiv.org/abs/2502.13595}.
 
 \bibitem[Fossum(2023)]{fossum_what_2023}
 Fossum, J.~E.
@@ -44,6 +75,17 @@ Hutter, S. and Kriesi, H.
 \newblock \doi{10.1080/1369183X.2020.1853902}.
 \newblock URL \url{https://www.tandfonline.com/doi/full/10.1080/1369183X.2020.1853902}.
 
+\bibitem[Jolly et~al.(2022)Jolly, Bakker, Hooghe, Marks, Polk, Rovny,
+  Steenbergen, and Vachudova]{jolly_chapel_2022}
+Jolly, S., Bakker, R., Hooghe, L., Marks, G., Polk, J., Rovny, J., Steenbergen,
+  M., and Vachudova, M.~A.
+\newblock Chapel {Hill} {Expert} {Survey} trend file, 1999–2019.
+\newblock \emph{Electoral Studies}, 75:\penalty0 102420, February 2022.
+\newblock ISSN 02613794.
+\newblock \doi{10.1016/j.electstud.2021.102420}.
+\newblock URL
+  \url{https://linkinghub.elsevier.com/retrieve/pii/S0261379421001323}.
+
 \bibitem[Kende \& Krekó(2020)Kende and Krekó]{kende_xenophobia_2020}
 Kende, A. and Krekó, P.
 \newblock Xenophobia, prejudice, and right-wing populism in {East}-{Central} {Europe}.
@@ -58,6 +100,18 @@ Kostikova, A., Pütz, O., Eger, S., Sabelfeld, O., and Paassen, B.
 \newblock URL \url{http://arxiv.org/abs/2509.07274}.
 \newblock arXiv:2509.07274 [cs].
 
+\bibitem[Miok et~al.(2024)Miok, Hidalgo~Tenorio, Osenova, Benítez-Castro, and
+  Robnik-Sikonja]{Miok2024}
+Miok, K., Hidalgo~Tenorio, E., Osenova, P., Benítez-Castro, M.-A., and
+  Robnik-Sikonja, M.
+\newblock Multi-aspect multilingual and cross-lingual parliamentary speech
+  analysis.
+\newblock \emph{Intelligent Data Analysis}, 28\penalty0 (1):\penalty0
+  239–260, February 2024.
+\newblock ISSN 1571-4128.
+\newblock \doi{10.3233/ida-227347}.
+\newblock URL \url{http://dx.doi.org/10.3233/IDA-227347}.
+
 \bibitem[Mudde(2007)]{mudde_populist_2007}
 Mudde, C.
 \newblock \emph{Populist {Radical} {Right} {Parties} in {Europe}}.
@@ -65,6 +119,34 @@ Mudde, C.
 \newblock ISBN 978-0-521-85081-0.
 \newblock \doi{10.1017/CBO9780511492037}.
 \newblock URL \url{https://www.cambridge.org/core/books/populist-radical-right-parties-in-europe/244D86C50E6D1DC44C86C4D1D313F16D}.
+
+\bibitem[Nanni et~al.(2021)Nanni, Glavas, Rehbein, Ponzetto, and
+  Stuckenschmidt]{Nanni2021}
+Nanni, F., Glavas, G., Rehbein, I., Ponzetto, S.~P., and Stuckenschmidt, H.
+\newblock Political text scaling meets computational semantics.
+\newblock \emph{ACM/IMS Transactions on Data Science}, 2\penalty0 (4):\penalty0
+  1–27, November 2021.
+\newblock ISSN 2691-1922.
+\newblock \doi{10.1145/3485666}.
+\newblock URL \url{http://dx.doi.org/10.1145/3485666}.
+
+\bibitem[Rheault \& Cochrane(2020)Rheault and Cochrane]{Rheault2020-mr}
+Rheault, L. and Cochrane, C.
+\newblock Word embeddings for the analysis of ideological placement in
+  parliamentary corpora.
+\newblock \emph{Polit. Anal.}, 28\penalty0 (1):\penalty0 112--133, January
+  2020.
+
+\bibitem[Rudkowsky et~al.(2018)Rudkowsky, Haselmayer, Wastian, Jenny, Emrich,
+  and Sedlmair]{Rudkowsky2018}
+Rudkowsky, E., Haselmayer, M., Wastian, M., Jenny, M., Emrich, S., and
+  Sedlmair, M.
+\newblock More than bags of words: Sentiment analysis with word embeddings.
+\newblock \emph{Communication Methods and Measures}, 12\penalty0
+  (2–3):\penalty0 140–157, April 2018.
+\newblock ISSN 1931-2466.
+\newblock \doi{10.1080/19312458.2018.1455817}.
+\newblock URL \url{http://dx.doi.org/10.1080/19312458.2018.1455817}.
 
 \bibitem[Rummens(2017)]{rummens_populism_2017}
 Rummens, S.

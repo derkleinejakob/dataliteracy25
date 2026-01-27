@@ -138,6 +138,8 @@ Electoral gains of populist parties have manifested in significant changes of pa
 
 More fine-grained analyses of the migration discourse have revealed the use of common underlying narratives, defined as `selective depictions of reality' and `patterns of interpretation' through which the issue is relayed to the public. Social media posts from populist leaders commonly employ anti-immigrant frames like `immigrants take our jobs' or anti-establishment narratives such as `our sovereignty is under threat' \citep{seiger_navigating_2025}.
 
+Building on these foundations, we apply computational methods to European Parliament debates to analyze migration discourse. We combine topic modeling to measure issue salience, semantic embeddings to map ideological positioning, and narrative detection to quantify the adoption of populist rhetorical frames across party groups.
+
 % agenda setting!
 
 This report provides a quantitative assessment of how the growing prominence of right-wing populism and immigration as a salient political issue manifests in debates in the European Parliament, with potential implications for broader societal discourse and legislative outcomes. All parliamentary speeches between 2004 and 2024 as recorded by the ParlLawSpeech dataset inform the analyses. 
@@ -145,6 +147,7 @@ This report provides a quantitative assessment of how the growing prominence of 
 Speeches are first classified into topics using Latent Dirichlet Allocation (LDA) to identify immigration-related debate and to estimate its prominence over time. Analyses of the distribution of migration-related speeches across predefined debate agendas provide quantitative evidence consistent with agenda-setting strategies employed by right-wing populist groups. With the use of speech embeddings, we examine the semantic dimensions along which party groups can be differentiated and find evidence for an increased use of previously identified anti-immigration narratives by right-wing groups compared to moderate factions.
 
 % Motivate the problem, situation or topic you decided to work on. Describe why it matters (is it of societal, economic, scientific value?). Outline the rest of the paper (use references, e.g.~to \Cref{sec:methods}: What kind of data you are working with, how you analyse it, and what kind of conclusion you reached. The point of the introduction is to make the reader want to read the rest of the paper.
+
 
 \section{Data and Methods}\label{sec:methods}
 % In this section, describe \emph{what you did}. Roughly speaking, explain what data you worked with, how or from where it was collected, it's structure and size. Explain your analysis, and any specific choices you made in it. Depending on the nature of your project, you may focus more or less on certain aspects. If you collected data yourself, explain the collection process in detail. If you downloaded data from the net, show an exploratory analysis that builds intuition for the data, and shows that you know the data well. If you are doing a custom analysis, explain how it works and why it is the right choice. If you are using a standard tool, it may still help to briefly outline it. Cite relevant works. You can use the \verb|\citep| and \verb|\citet| commands for this purpose \citep{mackay2003information}.
@@ -166,6 +169,32 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 % % \vskip -0.2in
 % % \end{figure}
 
+We are using the novel \textit{ParlLawSpeech} (PLS) dataset from Schwalbach et al. 2025 for the investigation of our study. It contains more than 570,000 plenary speeches from legislative periods of the European parliament (EP) between 1999 and 2024.
+The authors also provide (partially) machine translated text in English for about 40\% of the speeches, since the EP stopped providing official translations around the end of 2012. Furthermore, the dataset contains metadata on the speakers and the speeches given,
+e.g. date and agenda item under which the speech was given, if submission was in written form and/or from multiple \textit{members of parliament} (MEPs), or the speaker's party affiliation (referring to European political parties/groups), among other. We further enriched
+the dataset with metadata accessible from the public API of the EP's "Open Data Portal", in particular the national party affiliations of each speaker (by using the \textit{EP-ID} of the respective MEPs). This allowed us to link the PLS dataset with the \textit{Chapel Hill Expert Survey} (CHES)
+from Rovny, Bakker et al. 2025. The CHES dataset estimates party positioning on European integration, ideology (e.g. left/right) and policy issues for national parties in all member states of the European Union (EU). The study surveyed hundreds of experts roughly every four years
+between 1999 and 2024 and more recently (**TODO**: since when???) also includes ratings of non-EU policy issues such as immigration or anti-elite rhetoric (**TODO:** which are relevant in particular?) Assuming that the ideological orientation of a speaker's affiliated national party
+roughly reflects his own position, the CHES data set could help us to better control our analyses, as membership of a European party (group) presumably allows for less detailed/granular statements/assumptions.
+
+\subsection{Data Cleanup}
+    We detect high amount of superfluous commentary in transliterated speeches:  markers of the original language, background incidents, and procedural notes. These markers might be source of unwanted bias, which we want to avoid. Fortunately they are predominantly located within parentheses and can be easily removed with rule-based methods. We also observe substantial redundency in the openning and closing sections of the speeches. 
+    These sections follow similar rhetorical structures but exhibit substantial lexical variation. To identify low-impact sentences we use TF-IDF algorithm to score the amount of information they contain.
+    We construct separate corpora for opening and closing sentences, and an average TF-IDF score is computed for each sentence. [TODO: Explain how we found cuttoff point] 
+
+\subsection{Semantic Embeddings}
+    Semantic embeddings have been widely used in political text analysis \citep{Miok2024, Nanni2021, Rudkowsky2018}. Our aim is to capture patterns in how different political groups address migration. We select candidate embedding models from the MTEB leaderboard \citep{enevoldsen2025mmtebmassivemultilingualtext}, based on overall performance and parameter count. Final model selection is based on (i) intra- and interparty cosine similarities, (ii) predictive performance of a logistic regression model with political affiliation as our target variable, and (iii) Kmeans clustering quality measured by homogenity and completeness.
+
+    A key concern is that general-purpose semantic embeddings may be primarly capturing stylistic and topical variations and subsequently political group ideologies influence on the embeddings might be neglegible. We test whether intra- and interparty similarity distributions differ substantially with a two-sample Kolmogorov-Smirnov test.
+
+    We examine whether party affiliations are encoded in speech embeddings and how these patterns evolve over time. Dimensionality reduction has been used to ascertain parties ideological shift over time and to reveal underlying political dimension with word associations for each reduced axis  \citep{Rheault2020-mr}. Exploratory analysis showed that, although party influence is present, it is not the defining factor of our semantic embeddings. To better understand how party affiliations manifest in the vector space, we aim to identify a subspace of the embedding space in which political and ideological differences become more salient.
+
+    To this end, Instead of simply using PCA, we employ Partial Least Squares (PLS). PLS allows us to find directions in the embedding space that are maximally associated with party labels, making it suitable for uncovering latent political dimensions that are not necessarily dominant in the overall variance of the data.
+
+    The prevalence of established migration-related rhetoric was assessed using semantic search in a shared embedding space. We used all suitable migration narratives that were identified in a recent report by the European Commission’s Joint Research Centre \citep[p.130]{seiger_navigating_2025}. Each narrative was represented by a short descriptive sentence, which was embedded using the model’s built-in `retrieval-query' prompt. Semantic proximity between narratives and speeches was quantified using cosine similarity.
+
+    To validate whether semantic similarity to these narratives captured meaningful political differences, we correlated similarity scores with expert-coded party positions on migration policy and overall ideology from the Chapel Hill Expert Survey \citep{jolly_chapel_2022}. Pearson correlation coefficients were evaluated using a Bonferroni-adjusted significance threshold to account for multiple comparisons. Temporal trends and party-block differences in narrative prevalence were analysed as fixed effects of linear mixed-effects models, which incorporated random intercepts and slopes at the party-block level.
+
 \section{Results}\label{sec:results}
 
 \begin{figure}[ht]
@@ -179,6 +208,26 @@ Speeches are first classified into topics using Latent Dirichlet Allocation (LDA
 \end{center}
 \vskip -0.2in
 \end{figure}
+
+
+\begin{figure*}[ht]
+\vskip 0.2in
+\centering
+\centerline{\includegraphics[width=\linewidth]{"fig/fig3.pdf"}}
+\caption{ \textbf{Left.} Position of each political group  \textbf{Right.} Movement of political groups over the time displayed separately for each dimension  }\label{fig:fig3_pls} 
+\vskip -0.2in
+\end{figure*}
+
+    [Should this be in Discussion???]While a clear interpretation of the underlying political dimensions requires substantial domain knowledge, we believe that combining word associations with extreme examples of speeches along each cardinal direction provides strong clues about their connotations.
+    Based on this analysis, we interpret the first PLS axis as a \textbf{conciliatory $\Leftrightarrow$  oppositional} discourse spectrum, and the second axis as a \textbf{moral / human-rights $\Leftrightarrow$ pragmatic-benefits} debate \autoref{fig:fig3_pls}.
+
+    Moral outrage and discussion of human rights violations have been consistently key aspects of both green-left blocks and parts of the right block. Along the first axis, we observe little to no movement over the years overall, suggesting that political blocks have largely maintained their characteristic way of conducting discourse. Nevertheless, there is a clear division between centrist and oppositional blocks, with greens often positioned in between. Oppositional blocks exhibit adversarial framing and conflict-driven rhetoric, whereas centrist blocks focus more on consensus-building.
+    On the second axis, we observe a clear shift along the ethical–pragmatic spectrum. Between 2016 and 2020, many parties move from pragmatic policy framing towards more moral debates. Christian conservative and right-wing blocks remain closer to the axis center, while green and left blocks maintain stronger positions on the moral end of the spectrum.
+
+
+
+
+
 
 \begin{figure*}[ht]
 \vskip 0.2in
