@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2023.3.1)  19 JAN 2026 17:46
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025/Homebrew) (preloaded format=pdflatex 2025.11.7)  25 JAN 2026 16:18
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -735,14 +735,26 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-\c@@affilfirst=\count341
-\c@@affilsecond=\count342
-\c@@affilthird=\count343
-\c@@affilfourth=\count344
-\c@@affilfifth=\count345
- (./report.bbl
-LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 15.
- (/usr/local/texlive/2022/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+\c@@affilfirst=\count357
+\c@@affilsecond=\count358
+\c@@affilthird=\count359
+\c@@affilfourth=\count360
+\c@@affilfifth=\count361
+
+
+<fig/fig1_combined.pdf, id=33, 234.77426pt x 290.31891pt>
+File: fig/fig1_combined.pdf Graphic file (type pdf)
+<use fig/fig1_combined.pdf>
+Package pdftex.def Info: fig/fig1_combined.pdf  used on input line 174.
+(pdftex.def)             Requested size: 234.8775pt x 290.4555pt.
+<fig/fig4_search.pdf, id=34, 487.71927pt x 100.35205pt>
+File: fig/fig4_search.pdf Graphic file (type pdf)
+<use fig/fig4_search.pdf>
+Package pdftex.def Info: fig/fig4_search.pdf  used on input line 186.
+(pdftex.def)             Requested size: 487.8225pt x 100.37935pt.
+(./report.bbl
+LaTeX Font Info:    Trying to load font information for OT1+pcr on input line 13.
+ (/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 Package microtype Info: Loading generic protrusion settings for font family
@@ -752,52 +764,71 @@ Package microtype Info: Loading generic protrusion settings for font family
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [1{/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+[1{/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/map/pdftex/updmap/pdftex.map}{/opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/enc/dvips/base/8r.enc}
 
 
 
 ]
-Underfull \hbox (badness 10000) in paragraph at lines 40--49
+Underfull \vbox (badness 1448) has occurred while \output is active []
+
+
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 32--38
 [][]$\OT1/pcr/m/n/10 https : / / www . tandfonline . com / doi / full /
  []
 
 
-Underfull \hbox (badness 2027) in paragraph at lines 51--59
+Underfull \hbox (badness 2027) in paragraph at lines 40--46
 \OT1/ptm/m/n/10 (+20) 48(2):341--365, Jan-uary 2022.  ISSN 1369-183X,
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 51--59
+Underfull \hbox (badness 10000) in paragraph at lines 40--46
 [][]$\OT1/pcr/m/n/10 https : / / www . tandfonline . com / doi / full /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--88
+Underfull \hbox (badness 10000) in paragraph at lines 62--68
 [][]$\OT1/pcr/m/n/10 https : / / www . cambridge . org / core / books /
  []
 
 
-Overfull \hbox (22.42252pt too wide) in paragraph at lines 81--88
+Overfull \hbox (22.42252pt too wide) in paragraph at lines 62--68
 \OT1/pcr/m/n/10 populist-[]radical-[]right-[]parties-[]in-[]europe /
  []
 
-) [2] (./report.aux)
+
+
+[2 <./fig/fig1_combined.pdf>])
+
+
+
+[3
+
+ <./fig/fig4_search.pdf>] (./report.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-01-18>
+ ***********
 Package rerunfilecheck Info: File `report.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 26280 strings out of 478268
- 492866 string characters out of 5846348
- 806580 words of memory out of 5000000
- 43859 multiletter control sequences out of 15000+600000
- 490108 words of font info for 156 fonts, out of 8000000 for 9000
+ 28081 strings out of 473190
+ 531412 string characters out of 5704335
+ 955958 words of memory out of 5000000
+ 50684 multiletter control sequences out of 15000+600000
+ 584249 words of font info for 178 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,11n,89p,1069b,463s stack positions out of 10000i,1000n,20000p,200000b,200000s
-{/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on report.pdf (2 pages, 76939 bytes).
+ 84i,11n,91p,1070b,665s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/urw/courier/ucrr8a.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></opt/homebrew/Cellar/texlive/20250308_2/share/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
+Output written on report.pdf (3 pages, 190003 bytes).
 PDF statistics:
- 105 PDF objects out of 1000 (max. 8388607)
- 92 compressed objects within 1 object stream
- 18 named destinations out of 1000 (max. 500000)
- 34829 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 147 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
+ 24 named destinations out of 1000 (max. 500000)
+ 43031 words of extra memory for PDF output out of 51595 (max. 10000000)
 

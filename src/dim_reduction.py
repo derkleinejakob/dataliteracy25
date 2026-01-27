@@ -22,7 +22,8 @@ def display_axis_semantics(axis_words: list[tuple[list[str]]]) -> None:
 def closest_words_for_pc(k, model, vocab, probe_embs, top_n=20):
     reduced = model.transform(probe_embs)
 
-    reduced = reduced / np.linalg.vector_norm(reduced, ord=2, axis=1, keepdims=True)
+    reduced = reduced 
+    #/ np.linalg.vector_norm(reduced, ord=2, axis=1, keepdims=True)
     
     sorted_indices = np.argsort(reduced[:, k])
     pos_idx = sorted_indices[-top_n:]
