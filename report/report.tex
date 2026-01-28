@@ -82,28 +82,31 @@
 % in order of appearance and this is the preferred way.
 \icmlsetsymbol{equal}{*}
 
-
 \begin{icmlauthorlist}
-\icmlauthor{Giorgi Gogelashvili}{equal,first}
-\icmlauthor{Samia Haque}{equal,second}
-\icmlauthor{Jakob Kleine}{equal,third}
-\icmlauthor{Dennis Stroh}{equal,fourth}
-\icmlauthor{Quirin Unterguggenberger}{equal,fifth}
+\icmlauthor{Giorgi Gogelashvili}{equal}
+\icmlauthor{Samia Haque}{equal}
+\icmlauthor{Jakob Kleine}{equal}\\
+\icmlauthor{Dennis Stroh}{equal}
+\icmlauthor{Quirin Unterguggenberger}{equal}
 \end{icmlauthorlist}
 
 % fill in your matrikelnummer, email address, degree, for each group member
-\icmlaffiliation{first}{Matrikelnummer 12345678, MSc Machine Learning}
-\icmlaffiliation{second}{Matrikelnummer 12345678, MSc Computer Science}
-\icmlaffiliation{third}{Matrikelnummer 12345678, MSc Media Informatics}
-\icmlaffiliation{fourth}{Matrikelnummer 12345678, MSc Medical Informatics}
+% \icmlaffiliation{first}{Matrikelnummer 12345678, MSc Machine Learning}
+% \icmlaffiliation{second}{Matrikelnummer 12345678, MSc Computer Science}
+% \icmlaffiliation{third}{Matrikelnummer 12345678, MSc Media Informatics}
+% \icmlaffiliation{fourth}{Matrikelnummer 12345678, MSc Medical Informatics}
+% \icmlaffiliation{fifth}{Matrikelnummer 12345678, MSc QDS}
 
 % put your email addresses here. You can use initials to save space, 
 % e.g. if you are called Max Mustermann, you can use \icmlcorrespondingauthor{MM}{max.mustermann@uni-tuebingen.de}
 % DO USE YOUR UNIVERSITY EMAIL ADDRESS!
-\icmlcorrespondingauthor{Initials1}{first1.last1@uni-tuebingen.de} 
-\icmlcorrespondingauthor{Initials2}{first2.last2@uni-tuebingen.de}
-\icmlcorrespondingauthor{Initials3}{first3.last3@uni-tuebingen.de}
-\icmlcorrespondingauthor{Initials4}{first4.last4@uni-tuebingen.de}
+
+% for the Data Literacy report, to save space, you can here list the student email address of one author, who is willing to be contacted about this work in the future (e.g. in case we would like to use your report as an example for future course iterations)
+\icmlcorrespondingauthor{AB}{first1.last1@student.uni-tuebingen.de} 
+% \icmlcorrespondingauthor{Initials2}{first2.last2@uni-tuebingen.de}
+% \icmlcorrespondingauthor{Initials3}{first3.last3@uni-tuebingen.de}
+% \icmlcorrespondingauthor{Initials4}{first4.last4@uni-tuebingen.de}
+% \icmlcorrespondingauthor{Initials5}{first5.last5@uni-tuebingen.de}
 
 % You may provide any keywords that you
 % find helpful for describing your paper; these are used to populate
@@ -122,138 +125,60 @@
 % Remove it (just {}) if you do not need this facility.
 
 %\printAffiliationsAndNotice{}  % leave blank if no need to mention equal contribution
-% \printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
+\printAffiliationsAndNotice{\icmlEqualContribution} % otherwise use the standard text.
 
 \begin{abstract}
-Motivated by the rise of populism in Europe since the late 1990s, this study investigates ideological shifts in European Parliament (EP) speeches using natural language processing. Drawing on the novel ParLawSpeech dataset \citep{SDN-10.7802-2824} which contains 574,199 speeches from 1999 to 2024 alongside metadata on speaker identity, we use sentence embedding models to examine the semantic content and emotional tone of parliamentary debates over time.
-
-We expect that speech embeddings will form clusters reflecting party affiliation and ideological alignment. In step with recent political developments, we further hypothesize an increase in negative sentiment within the immigration debate among centrist and right-wing groups, accompanied by growing semantic similarity between these two factions over the past two decades. Finally, we test whether established migration-related narratives associated with right-wing populism can be identified in parliamentary discourse and how their prevalence has developed over time.
+\input{sections/abstract.tex}
 \end{abstract}
 
 \section{Introduction}\label{sec:intro}
-
-The continued success of right-wing populist parties in the 21st century is widely regarded as a major threat to European democracy and integration \citep{fossum_what_2023,rummens_populism_2017}. Populist rhetoric is commonly defined as constructing an antagonism between a `pure people' and a `corrupt elite' \citep{mudde_populist_2007}. Right-wing populism is also closely tied to the issue of immigration. Parties of this ideology have played a central role in the increasing politicisation of immigration \citep{hutter_politicising_2022}, which represents a crucial factor for their political success \citep{kende_xenophobia_2020}. Over the past decade, immigration has become an increasingly salient issue in European election campaigns \citep{dekeyser_elections_2023} as well as in media coverage \citep{greussing_shifting_2017}.
-
-Electoral gains of populist parties have manifested in significant changes of parliamentary discourse \citep{schwalbach2023talking}. A recent quantitative analysis of EP speech embeddings has identified a gradual increase in emotional rhetoric since 1999, with right-wing populist groups leading the trend \citep{subtil_verger_2024}. In the German national parliament, an LLM-based study has revealed increasing anti-solidarity messaging around immigration, not only for right-wing, but also christian-conservative and liberal parties \citep{kostikova_llm_2025}. This trend begins around 2015, which marks the onset of the so-called `refugee crisis' \citep{brueckner_crisis_2026}.
-
-More fine-grained analyses of the migration discourse have revealed the use of common underlying narratives, defined as `selective depictions of reality' and `patterns of interpretation' through which the issue is relayed to the public. Social media posts from populist leaders commonly employ anti-immigrant frames like `immigrants take our jobs' or anti-establishment narratives such as `our sovereignty is under threat' \citep{seiger_navigating_2025}.
-
-Building on these foundations, we apply computational methods to European Parliament debates to analyze migration discourse. We combine topic modeling to measure issue salience, semantic embeddings to map ideological positioning, and narrative detection to quantify the adoption of populist rhetorical frames across party groups.
-
-% agenda setting!
-
-This report provides a quantitative assessment of how the growing prominence of right-wing populism and immigration as a salient political issue manifests in debates in the European Parliament, with potential implications for broader societal discourse and legislative outcomes. All parliamentary speeches between 2004 and 2024 as recorded by the ParlLawSpeech dataset inform the analyses. 
-
-Speeches are first classified into topics using Latent Dirichlet Allocation (LDA) to identify immigration-related debate and to estimate its prominence over time. Analyses of the distribution of migration-related speeches across predefined debate agendas provide quantitative evidence consistent with agenda-setting strategies employed by right-wing populist groups. With the use of speech embeddings, we examine the semantic dimensions along which party groups can be differentiated and find evidence for an increased use of previously identified anti-immigration narratives by right-wing groups compared to moderate factions.
-
-% Motivate the problem, situation or topic you decided to work on. Describe why it matters (is it of societal, economic, scientific value?). Outline the rest of the paper (use references, e.g.~to \Cref{sec:methods}: What kind of data you are working with, how you analyse it, and what kind of conclusion you reached. The point of the introduction is to make the reader want to read the rest of the paper.
-
+\input{sections/1_intro/introduction.tex}
 
 \section{Data and Methods}\label{sec:methods}
-% In this section, describe \emph{what you did}. Roughly speaking, explain what data you worked with, how or from where it was collected, it's structure and size. Explain your analysis, and any specific choices you made in it. Depending on the nature of your project, you may focus more or less on certain aspects. If you collected data yourself, explain the collection process in detail. If you downloaded data from the net, show an exploratory analysis that builds intuition for the data, and shows that you know the data well. If you are doing a custom analysis, explain how it works and why it is the right choice. If you are using a standard tool, it may still help to briefly outline it. Cite relevant works. You can use the \verb|\citep| and \verb|\citet| commands for this purpose \citep{mackay2003information}.
 
-% % This is the template for a figure from the original ICML submission pack. In lecture 10 we will discuss plotting in detail.
-% % Refer to this lecture on how to include figures in this text.
-% % 
-% % \begin{figure}[ht]
-% % \vskip 0.2in
-% % \begin{center}
-% % \centerline{\includegraphics[width=\columnwidth]{icml_numpapers}}
-% % \caption{Historical locations and number of accepted papers for International
-% % Machine Learning Conferences (ICML 1993 -- ICML 2008) and International
-% % Workshops on Machine Learning (ML 1988 -- ML 1992). At the time this figure was
-% % produced, the number of accepted papers for ICML 2008 was unknown and instead
-% % estimated.}
-% % \label{icml-historical}
-% % \end{center}
-% % \vskip -0.2in
-% % \end{figure}
+    % In this section, describe \emph{what you did}. Roughly speaking, explain what data you worked with, how or from where it was collected, it's structure and size. Explain your analysis, and any specific choices you made in it. Depending on the nature of your project, you may focus more or less on certain aspects. If you collected data yourself, explain the collection process in detail. If you downloaded data from the net, show an exploratory analysis that builds intuition for the data, and shows that you know the data well. If you are doing a custom analysis, explain how it works and why it is the right choice. If you are using a standard tool, it may still help to briefly outline it. Cite relevant works. You can use the \verb|\citep| and \verb|\citet| commands for this purpose \citep{mackay2003information}.
 
-We are using the novel \textit{ParlLawSpeech} (PLS) dataset from Schwalbach et al. 2025 for the investigation of our study. It contains more than 570,000 plenary speeches from legislative periods of the European parliament (EP) between 1999 and 2024.
-The authors also provide (partially) machine translated text in English for about 40\% of the speeches, since the EP stopped providing official translations around the end of 2012. Furthermore, the dataset contains metadata on the speakers and the speeches given,
-e.g. date and agenda item under which the speech was given, if submission was in written form and/or from multiple \textit{members of parliament} (MEPs), or the speaker's party affiliation (referring to European political parties/groups), among other. We further enriched
-the dataset with metadata accessible from the public API of the EP's "Open Data Portal", in particular the national party affiliations of each speaker (by using the \textit{EP-ID} of the respective MEPs). This allowed us to link the PLS dataset with the \textit{Chapel Hill Expert Survey} (CHES)
-from Rovny, Bakker et al. 2025. The CHES dataset estimates party positioning on European integration, ideology (e.g. left/right) and policy issues for national parties in all member states of the European Union (EU). The study surveyed hundreds of experts roughly every four years
-between 1999 and 2024 and more recently (**TODO**: since when???) also includes ratings of non-EU policy issues such as immigration or anti-elite rhetoric (**TODO:** which are relevant in particular?) Assuming that the ideological orientation of a speaker's affiliated national party
-roughly reflects his own position, the CHES data set could help us to better control our analyses, as membership of a European party (group) presumably allows for less detailed/granular statements/assumptions.
+    % This is the template for a figure from the original ICML submission pack. In lecture 10 we will discuss plotting in detail.
+    % Refer to this lecture on how to include figures in this text.
+    % 
+    % \begin{figure}[ht]
+    % \vskip 0.2in
+    % \begin{center}
+    % \centerline{\includegraphics[width=\columnwidth]{icml_numpapers}}
+    % \caption{Historical locations and number of accepted papers for International
+    % Machine Learning Conferences (ICML 1993 -- ICML 2008) and International
+    % Workshops on Machine Learning (ML 1988 -- ML 1992). At the time this figure was
+    % produced, the number of accepted papers for ICML 2008 was unknown and instead
+    % estimated.}
+    % \label{icml-historical}
+    % \end{center}
+    % \vskip -0.2in
+    % \end{figure}
 
-\subsection{Data Cleanup}
-    We detect high amount of superfluous commentary in transliterated speeches:  markers of the original language, background incidents, and procedural notes. These markers might be source of unwanted bias, which we want to avoid. Fortunately they are predominantly located within parentheses and can be easily removed with rule-based methods. We also observe substantial redundency in the openning and closing sections of the speeches. 
-    These sections follow similar rhetorical structures but exhibit substantial lexical variation. To identify low-impact sentences we use TF-IDF algorithm to score the amount of information they contain.
-    We construct separate corpora for opening and closing sentences, and an average TF-IDF score is computed for each sentence. [TODO: Explain how we found cuttoff point] 
+    \subsection{Dataset description}
+    \input{sections/2_data_methods/description.tex}
 
-\subsection{Semantic Embeddings}
-    Semantic embeddings have been widely used in political text analysis \citep{Miok2024, Nanni2021, Rudkowsky2018}. Our aim is to capture patterns in how different political groups address migration. We select candidate embedding models from the MTEB leaderboard \citep{enevoldsen2025mmtebmassivemultilingualtext}, based on overall performance and parameter count. Final model selection is based on (i) intra- and interparty cosine similarities, (ii) predictive performance of a logistic regression model with political affiliation as our target variable, and (iii) Kmeans clustering quality measured by homogenity and completeness.
+    \subsection{Data preprocessing}
 
-    A key concern is that general-purpose semantic embeddings may be primarly capturing stylistic and topical variations and subsequently political group ideologies influence on the embeddings might be neglegible. We test whether intra- and interparty similarity distributions differ substantially with a two-sample Kolmogorov-Smirnov test.
+    \input{sections/2_data_methods/preprocessing/duplicates.tex}
 
-    We examine whether party affiliations are encoded in speech embeddings and how these patterns evolve over time. Dimensionality reduction has been used to ascertain parties ideological shift over time and to reveal underlying political dimension with word associations for each reduced axis  \citep{Rheault2020-mr}. Exploratory analysis showed that, although party influence is present, it is not the defining factor of our semantic embeddings. To better understand how party affiliations manifest in the vector space, we aim to identify a subspace of the embedding space in which political and ideological differences become more salient.
+    \input{sections/2_data_methods/preprocessing/commentary.tex}
 
-    To this end, Instead of simply using PCA, we employ Partial Least Squares (PLS). PLS allows us to find directions in the embedding space that are maximally associated with party labels, making it suitable for uncovering latent political dimensions that are not necessarily dominant in the overall variance of the data.
+    \input{sections/2_data_methods/preprocessing/translation.tex}
 
-    The prevalence of established migration-related rhetoric was assessed using semantic search in a shared embedding space. We used all suitable migration narratives that were identified in a recent report by the European Commission’s Joint Research Centre \citep[p.130]{seiger_navigating_2025}. Each narrative was represented by a short descriptive sentence, which was embedded using the model’s built-in `retrieval-query' prompt. Semantic proximity between narratives and speeches was quantified using cosine similarity.
-
-    To validate whether semantic similarity to these narratives captured meaningful political differences, we correlated similarity scores with expert-coded party positions on migration policy and overall ideology from the Chapel Hill Expert Survey \citep{jolly_chapel_2022}. Pearson correlation coefficients were evaluated using a Bonferroni-adjusted significance threshold to account for multiple comparisons. Temporal trends and party-block differences in narrative prevalence were analysed as fixed effects of linear mixed-effects models, which incorporated random intercepts and slopes at the party-block level.
+    \subsection{Methods}
+    \input{sections/2_data_methods/methods/lda.tex}
+    \input{sections/2_data_methods/methods/embeddings.tex}
 
 \section{Results}\label{sec:results}
-
-\begin{figure}[ht]
-\vskip 0.2in
-\begin{center}
-\centerline{\includegraphics[width=\columnwidth]{"fig/fig1_combined.pdf"}}
-\caption{\textbf{Top:} Prevalence of selected topics in European Parliament debates over the past decade, as identified by LDA topic modeling (see repository for an interactive version with all topics).
-\textbf{Bottom:} Proportional contributions of political groups to migration topic. In both panels, proportions are computed by dividing by the total number of speeches per year.}
-
-\label{fig:fig1_lda}
-\end{center}
-\vskip -0.2in
-\end{figure}
-
-
-\begin{figure*}[ht]
-\vskip 0.2in
-\centering
-\centerline{\includegraphics[width=\linewidth]{"fig/fig3.pdf"}}
-\caption{ \textbf{Left.} Position of each political group  \textbf{Right.} Movement of political groups over the time displayed separately for each dimension  }\label{fig:fig3_pls} 
-\vskip -0.2in
-\end{figure*}
-
-    [Should this be in Discussion???]While a clear interpretation of the underlying political dimensions requires substantial domain knowledge, we believe that combining word associations with extreme examples of speeches along each cardinal direction provides strong clues about their connotations.
-    Based on this analysis, we interpret the first PLS axis as a \textbf{conciliatory $\Leftrightarrow$  oppositional} discourse spectrum, and the second axis as a \textbf{moral / human-rights $\Leftrightarrow$ pragmatic-benefits} debate \autoref{fig:fig3_pls}.
-
-    Moral outrage and discussion of human rights violations have been consistently key aspects of both green-left blocks and parts of the right block. Along the first axis, we observe little to no movement over the years overall, suggesting that political blocks have largely maintained their characteristic way of conducting discourse. Nevertheless, there is a clear division between centrist and oppositional blocks, with greens often positioned in between. Oppositional blocks exhibit adversarial framing and conflict-driven rhetoric, whereas centrist blocks focus more on consensus-building.
-    On the second axis, we observe a clear shift along the ethical–pragmatic spectrum. Between 2016 and 2020, many parties move from pragmatic policy framing towards more moral debates. Christian conservative and right-wing blocks remain closer to the axis center, while green and left blocks maintain stronger positions on the moral end of the spectrum.
-
-
-
-
-
-
-\begin{figure*}[ht]
-\vskip 0.2in
-\begin{center}
-\centerline{\includegraphics[width=\textwidth]{"fig/fig4_search.pdf"}}
-\caption{}
-\label{fig:fig4_search}
-\end{center}
-\vskip -0.2in
-\end{figure*}
-
 % In this section outline your results. At this point, you are just stating the outcome of your analysis. You can highlight important aspects (``we observe a significantly higher value of $x$ over $y$''), but leave interpretation and opinion to the next section. This section absoultely \emph{must} include at least two figures.
 
+\input{sections/3_results/lda.tex}
+\input{sections/3_results/pls.tex}
+\input{sections/3_results/sem_search.tex}
+
 \section{Discussion \& Conclusion}\label{sec:conclusion}
-
-% Use this section to briefly summarize the entire text. Highlight limitations and problems, but also make clear statements where they are possible and supported by the analysis. 
-
-% \newpage
-
-% \section*{Contribution Statement}
-% Explain here, in one sentence per person, what each group member contributed. For example, you could write: Max Mustermann collected and prepared data. Gabi Musterfrau and John Doe performed the data analysis. Jane Doe produced visualizations. All authors will jointly wrote the text of the report. Note that you, as a group, a collectively responsible for the report. Your contributions should be roughly equal in amount and difficulty.
-
-% \section*{Notes} 
-
-% Your entire report has a \textbf{hard page limit of 4 pages} excluding references and the contribution statement. (I.e. any pages beyond page 4 must only contain the contribution statement and references). Appendices are \emph{not} possible. But you can put additional material, like interactive visualizations or videos, on a githunb repo (use \href{https://github.com/pnkraemer/tueplots}{links} in your pdf to refer to them). Each report has to contain \textbf{at least three plots or visualizations}, and \textbf{cite at least two references}. More details about how to prepare the report, inclucing how to produce plots, cite correctly, and how to ideally structure your github repo, will be discussed in the lecture, where a rubric for the evaluation will also be provided.
-
+\input{sections/4_discussion/discussion.tex}
 
 \bibliography{bibliography}
 \bibliographystyle{icml2025}
