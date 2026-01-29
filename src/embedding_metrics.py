@@ -58,8 +58,6 @@ def get_cluster_quality(df: pd.DataFrame, model: str, target_var: str, weighted:
 
 
 
-
-
 def pls_coefficient_of_determination(df: pd.DataFrame, model: str, target_var: str, categorical: bool = True) -> float:
     X = np.stack(df[model])
     if categorical:
