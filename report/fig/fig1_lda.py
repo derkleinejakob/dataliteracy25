@@ -90,7 +90,7 @@ ax2 = df_migration.pivot(index='year', columns='block', values='ratio').plot.are
 )
 
 ax2.set_xlabel("")
-ax2.set_ylabel('Proportion of Speeches')
+ax2.set_ylabel('Proportion of Speeches per Year')
 # ax.set_title("Migration Discourse by Political Block")
 
 # reverse legend order
@@ -98,7 +98,7 @@ handles, labels = ax2.get_legend_handles_labels()
 # rename labels using dictionary
 labels = [const.LEGEND_BLOCK[label] for label in labels]
 
-ax2.legend(handles[::-1], labels[::-1], loc='lower left', frameon=True)
+ax2.legend(handles[::-1], labels[::-1], loc='upper right', frameon=True)
 
 # grid
 ax2.set_axisbelow(True)
@@ -125,7 +125,7 @@ plt.rcParams.update(params)
 fig, (ax1_combined, ax2_combined) = plt.subplots(2, 1)
 # panel 1
 df_pivot.plot.area(cmap="viridis", alpha=0.75, ax=ax1_combined)
-ax1_combined.set_ylabel('Proportion of Speeches')
+ax1_combined.set_ylabel('Proportion of Speeches per Year')
 ax1_combined.set_xlabel('')
 # ax1_combined.set_xticklabels([])
 handles, labels = ax1_combined.get_legend_handles_labels()
@@ -137,31 +137,30 @@ ax1_combined.grid(alpha=0.3)
 ax1_combined.spines['top'].set_visible(False)
 ax1_combined.spines['right'].set_visible(False)
 # panel 2
-df_migration.pivot(index='year', columns='block', values='ratio').plot.area(
+df_migration.pivot(index='year', columns='block', values='n_speeches').plot.area(
     stacked=True, 
     color=[const.COLOR_MAP_BLOCK[block] for block in const.ORDER_BLOCK],
     alpha=0.75,
     ax=ax2_combined
 )
 ax2_combined.set_xlabel("")
-ax2_combined.set_ylabel('Proportion of Speeches')
+ax2_combined.set_ylabel('Number of Migration Speeches')
 handles, labels = ax2_combined.get_legend_handles_labels()
 labels = [const.LEGEND_BLOCK[label] for label in labels]
-ax2_combined.legend(handles[::-1], labels[::-1], loc='lower left', frameon=True)
+ax2_combined.legend(handles[::-1], labels[::-1], loc='upper right', frameon=True)
 ax2_combined.set_axisbelow(True)
 ax2_combined.grid(alpha=0.3)
 ax2_combined.set_xlim(2014, 2024)
-ax2_combined.yaxis.set_major_formatter(plt.FuncFormatter(lambda y, _: f'{y:.0%}'.replace('%', r'\%')))
 ax2_combined.spines['top'].set_visible(False)
 ax2_combined.spines['right'].set_visible(False)
 
 # add arrow annotation
-ax1_combined.annotate(
-    '', 
-    xy=(0.55, 0.50), xycoords='figure fraction', 
-    xytext=(0.55, 0.58), textcoords='figure fraction',
-    arrowprops=dict(color='#440154', lw=1)
-)
+# ax1_combined.annotate(
+#     '', 
+#     xy=(0.55, 0.50), xycoords='figure fraction', 
+#     xytext=(0.55, 0.58), textcoords='figure fraction',
+#     arrowprops=dict(color='#440154', lw=1)
+# )
 
 # fig.tight_layout()
 fig.savefig("report/fig/fig1_combined.pdf")
