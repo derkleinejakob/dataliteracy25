@@ -26,11 +26,10 @@ category_labels = {
 ches_years = df['year_ches'].unique()
 df_ches = df[df['year_x'].isin(ches_years)].copy()
 
-# get CHES dimensions with less than 80% missing data
+# get CHES dimensions that were assessed in at least 2 different years
 ches_dims = const.CHES_DIMENSIONS.copy()
 for dim in const.CHES_DIMENSIONS:
-    missing_prop = df_ches[dim].isna().mean()
-    if missing_prop > 0.80:
+    if len(df_ches['year_x'].loc[df_ches[dim].notna()].unique()) < 2:
         ches_dims.remove(dim)
 
 # compute correlations for each narrative
@@ -43,11 +42,11 @@ significance_data = {}
 for ches_dim in ches_dims:
     for narrative in selected_categories:
         df_subset = df_ches.dropna(subset=[narrative, ches_dim])
-        if len(df_subset) > 10:
-            cor, p_value = stats.pearsonr(df_subset[narrative], df_subset[ches_dim])
-            significance_data[(ches_dim, narrative)] = (cor, p_value, p_value < corrected_alpha)
-        else:
-            significance_data[(ches_dim, narrative)] = (np.nan, np.nan, False)
+        # if len(df_subset) > 10:
+        cor, p_value = stats.pearsonr(df_subset[narrative], df_subset[ches_dim])
+        significance_data[(ches_dim, narrative)] = (cor, p_value, p_value < corrected_alpha)
+        # else:
+        #     significance_data[(ches_dim, narrative)] = (np.nan, np.nan, False)
 
 # get top 3 correlations for each narrative
 top_ches_per_narrative = {}
